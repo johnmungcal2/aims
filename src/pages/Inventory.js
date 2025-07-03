@@ -79,13 +79,11 @@ function DeviceFormModal({
   return (
     <div style={styles.modalOverlay}>
       <div style={styles.inventoryModalContent}>
-<<<<<<< HEAD
         <h3 style={styles.inventoryModalTitle}>{data.id ? "Edit Device" : "Add Device"}</h3>
         
         {/* Row 1: Device Type and Brand */}
         <div style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}>
           <div style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}>
-=======
         <h3 style={styles.inventoryModalTitle}>
           {data.id ? "Edit Device" : "Add Device"}
         </h3>
@@ -97,7 +95,6 @@ function DeviceFormModal({
           <div
             style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}
           >
->>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             <label style={styles.inventoryLabel}>Device Type:</label>
             <select
               name="deviceType"

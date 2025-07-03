@@ -354,7 +354,6 @@ function Clients() {
                           cursor: "pointer",
                           transition: "background 0.18s",
                         }}
-<<<<<<< HEAD
                         onMouseEnter={e => e.currentTarget.style.background = "#ffd6de"}
                         onMouseLeave={e => e.currentTarget.style.background = "#ffe9ec"}
                         onClick={() => handleDelete(client.id)}
@@ -365,7 +364,6 @@ function Clients() {
                           <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>
                           <line x1="10" y1="11" x2="10" y2="17"/>
                           <line x1="14" y1="11" x2="14" y2="17"/>
-=======
                         onMouseEnter={(e) =>
                           (e.currentTarget.style.background = "#ffd6de")
                         }
@@ -389,7 +387,6 @@ function Clients() {
                           <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
                           <line x1="10" y1="11" x2="10" y2="17" />
                           <line x1="14" y1="11" x2="14" y2="17" />
->>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                         </svg>
                       </button>
                     </div>
@@ -421,11 +418,8 @@ const styles = {
     margin: 0,
     marginBottom: 18,
     letterSpacing: 1,
-<<<<<<< HEAD
     fontFamily: 'Segoe UI, Arial, sans-serif',
-=======
     fontFamily: "Segoe UI, Arial, sans-serif",
->>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
   },
   searchBarRow: {
     display: "flex",
@@ -433,14 +427,8 @@ const styles = {
     gap: 10,
     marginBottom: 18,
     paddingLeft: 0,
-<<<<<<< HEAD
     flexWrap: 'wrap',
-=======
-    flexWrap: "wrap",
->>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
-  },
   searchBarContainer: {
-    display: "flex",
     alignItems: "center",
     background: "#fff",
     borderRadius: 24,
@@ -502,11 +490,8 @@ const styles = {
     width: "100%",
     minWidth: 0, // Allow table to shrink
     borderCollapse: "separate",
-<<<<<<< HEAD
     borderSpacing: 0 ,
-=======
     borderSpacing: 0,
->>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
     background: "#fff",
     borderRadius: 16,
     overflow: "hidden",
