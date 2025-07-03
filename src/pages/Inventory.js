@@ -85,11 +85,17 @@ function DeviceFormModal({
   return (
     <div style={styles.modalOverlay}>
       <div style={styles.inventoryModalContent}>
-        <h3 style={styles.inventoryModalTitle}>{data.id ? "Edit Device" : "Add Device"}</h3>
-        
+        <h3 style={styles.inventoryModalTitle}>
+          {data.id ? "Edit Device" : "Add Device"}
+        </h3>
+
         {/* Row 1: Device Type and Brand */}
-        <div style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}>
-          <div style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}>
+        <div
+          style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}
+        >
+          <div
+            style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}
+          >
             <label style={styles.inventoryLabel}>Device Type:</label>
             <select
               name="deviceType"
@@ -105,8 +111,10 @@ function DeviceFormModal({
               ))}
             </select>
           </div>
-          
-          <div style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}>
+
+          <div
+            style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}
+          >
             <label style={styles.inventoryLabel}>Brand:</label>
             <input
               name="brand"
@@ -122,12 +130,26 @@ function DeviceFormModal({
         {data.deviceType && (
           <div style={{ ...styles.inventoryInputGroup, marginBottom: 12 }}>
             <label style={styles.inventoryLabel}>Device Tag:</label>
-            <div style={{ display: "flex", gap: 10, alignItems: "center", width: "100%" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: 10,
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
               {!useSerial ? (
                 <>
-                  <span style={{ fontWeight: 600, fontSize: 14, color: "#2563eb", minWidth: "fit-content" }}>{`JOII${
-                    deviceTypes.find((t) => t.label === data.deviceType)?.code ||
-                    ""
+                  <span
+                    style={{
+                      fontWeight: 600,
+                      fontSize: 14,
+                      color: "#2563eb",
+                      minWidth: "fit-content",
+                    }}
+                  >{`JOII${
+                    deviceTypes.find((t) => t.label === data.deviceType)
+                      ?.code || ""
                   }`}</span>
                   <input
                     name="deviceTagDigits"
@@ -150,16 +172,29 @@ function DeviceFormModal({
                         },
                       });
                     }}
-                    style={{ width: 70, padding: "8px 12px", borderRadius: 6, border: '1.5px solid #cbd5e1', background: '#f1f5f9', fontSize: 14, height: "36px", boxSizing: "border-box" }}
+                    style={{
+                      width: 70,
+                      padding: "8px 12px",
+                      borderRadius: 6,
+                      border: "1.5px solid #cbd5e1",
+                      background: "#f1f5f9",
+                      fontSize: 14,
+                      height: "36px",
+                      boxSizing: "border-box",
+                    }}
                     maxLength={4}
                     pattern="\\d{0,4}"
                     placeholder="0001"
                   />
-                  <button type="button" onClick={onGenerateTag} style={{
-                    ...styles.inventoryModalButtonSmall,
-                    padding: "6px 12px",
-                    fontSize: 13
-                  }}>
+                  <button
+                    type="button"
+                    onClick={onGenerateTag}
+                    style={{
+                      ...styles.inventoryModalButtonSmall,
+                      padding: "6px 12px",
+                      fontSize: 13,
+                    }}
+                  >
                     Generate
                   </button>
                 </>
@@ -169,13 +204,31 @@ function DeviceFormModal({
                   name="deviceTag"
                   value={data.deviceTag}
                   onChange={onChange}
-                  style={{ flex: 1, padding: "8px 12px", borderRadius: 6, border: '1.5px solid #cbd5e1', background: '#f1f5f9', fontSize: 14, height: "36px", boxSizing: "border-box" }}
+                  style={{
+                    flex: 1,
+                    padding: "8px 12px",
+                    borderRadius: 6,
+                    border: "1.5px solid #cbd5e1",
+                    background: "#f1f5f9",
+                    fontSize: 14,
+                    height: "36px",
+                    boxSizing: "border-box",
+                  }}
                   maxLength={64}
                   placeholder="Enter Serial Number"
                 />
               )}
             </div>
-            <label style={{ marginTop: 8, display: "flex", alignItems: "center", fontWeight: 400, fontSize: 13, color: "#222e3a" }}>
+            <label
+              style={{
+                marginTop: 8,
+                display: "flex",
+                alignItems: "center",
+                fontWeight: 400,
+                fontSize: 13,
+                color: "#222e3a",
+              }}
+            >
               <input
                 type="checkbox"
                 checked={useSerial}
@@ -185,17 +238,39 @@ function DeviceFormModal({
               Use Serial Number Instead
             </label>
             {tagError && (
-              <span style={{ color: "#e57373", fontSize: 12, marginTop: 4, display: "block" }}>{tagError}</span>
+              <span
+                style={{
+                  color: "#e57373",
+                  fontSize: 12,
+                  marginTop: 4,
+                  display: "block",
+                }}
+              >
+                {tagError}
+              </span>
             )}
             {saveError && (
-              <span style={{ color: "#e57373", fontSize: 12, marginTop: 4, display: "block" }}>{saveError}</span>
+              <span
+                style={{
+                  color: "#e57373",
+                  fontSize: 12,
+                  marginTop: 4,
+                  display: "block",
+                }}
+              >
+                {saveError}
+              </span>
             )}
           </div>
         )}
 
         {/* Row 3: Model and Condition */}
-        <div style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}>
-          <div style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}>
+        <div
+          style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}
+        >
+          <div
+            style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}
+          >
             <label style={styles.inventoryLabel}>Model:</label>
             <input
               name="model"
@@ -204,8 +279,10 @@ function DeviceFormModal({
               style={styles.inventoryInput}
             />
           </div>
-          
-          <div style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}>
+
+          <div
+            style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}
+          >
             <label style={styles.inventoryLabel}>Condition:</label>
             <select
               name="condition"
@@ -224,9 +301,17 @@ function DeviceFormModal({
         </div>
 
         {/* Row 4: Quantity (if not editing) and Assigned To */}
-        <div style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}>
+        <div
+          style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}
+        >
           {!isEditMode && (
-            <div style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}>
+            <div
+              style={{
+                ...styles.inventoryInputGroup,
+                flex: 1,
+                marginBottom: 0,
+              }}
+            >
               <label style={styles.inventoryLabel}>Quantity:</label>
               <input
                 name="quantity"
@@ -238,8 +323,10 @@ function DeviceFormModal({
               />
             </div>
           )}
-          
-          <div style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}>
+
+          <div
+            style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}
+          >
             <label style={styles.inventoryLabel}>Assigned To:</label>
             <select
               name="assignedTo"
@@ -258,9 +345,17 @@ function DeviceFormModal({
         </div>
 
         {/* Row 5: Assignment Date and Remarks */}
-        <div style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}>
+        <div
+          style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}
+        >
           {data.assignedTo && (
-            <div style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}>
+            <div
+              style={{
+                ...styles.inventoryInputGroup,
+                flex: 1,
+                marginBottom: 0,
+              }}
+            >
               <label style={styles.inventoryLabel}>Assignment Date:</label>
               <input
                 type="date"
@@ -271,8 +366,14 @@ function DeviceFormModal({
               />
             </div>
           )}
-          
-          <div style={{ ...styles.inventoryInputGroup, flex: data.assignedTo ? 1 : 2, marginBottom: 0 }}>
+
+          <div
+            style={{
+              ...styles.inventoryInputGroup,
+              flex: data.assignedTo ? 1 : 2,
+              marginBottom: 0,
+            }}
+          >
             <label style={styles.inventoryLabel}>Remarks:</label>
             <input
               name="remarks"
@@ -284,21 +385,36 @@ function DeviceFormModal({
         </div>
 
         {/* Buttons */}
-        <div style={{ marginTop: 16, display: "flex", justifyContent: "center", gap: 10, width: "100%" }}>
-          <button onClick={onSave} disabled={!isValid} style={{
-            ...styles.inventoryModalButton,
-            opacity: isValid ? 1 : 0.6,
-            cursor: isValid ? "pointer" : "not-allowed",
-            padding: "10px 24px",
-            fontSize: 14
-          }}>
+        <div
+          style={{
+            marginTop: 16,
+            display: "flex",
+            justifyContent: "center",
+            gap: 10,
+            width: "100%",
+          }}
+        >
+          <button
+            onClick={onSave}
+            disabled={!isValid}
+            style={{
+              ...styles.inventoryModalButton,
+              opacity: isValid ? 1 : 0.6,
+              cursor: isValid ? "pointer" : "not-allowed",
+              padding: "10px 24px",
+              fontSize: 14,
+            }}
+          >
             Save
           </button>
-          <button onClick={onCancel} style={{
-            ...styles.inventoryModalButtonSecondary,
-            padding: "10px 24px",
-            fontSize: 14
-          }}>
+          <button
+            onClick={onCancel}
+            style={{
+              ...styles.inventoryModalButtonSecondary,
+              padding: "10px 24px",
+              fontSize: 14,
+            }}
+          >
             Cancel
           </button>
         </div>
@@ -308,87 +424,98 @@ function DeviceFormModal({
 }
 
 function Inventory() {
-
   // Add this function inside your Inventory component, before the return statement:
-const handleTempDeployDone = async () => {
-  if (!selectedAssignEmployee || !assigningDevice) return;
-  try {
-    // Generate docx for temporary deploy
-    const response = await fetch(
-      "/src/AccountabilityForms/ASSET ACCOUNTABILITY FORM - NEW ISSUE.docx"
-    );
-    const content = await response.arrayBuffer();
-    const zip = new PizZip(content);
-    const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
-    const emp = employees.find((e) => e.id === selectedAssignEmployee.id);
-    // Philippine date logic
-    const now = new Date();
-    const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-    const phTime = new Date(utc + 8 * 60 * 60000); // GMT+8
-    const assignmentDate = phTime.getFullYear() + '-' +
-      String(phTime.getMonth() + 1).padStart(2, '0') + '-' +
-      String(phTime.getDate()).padStart(2, '0');
-    doc.setData({
-      name: emp?.fullName || "",
-      dateHired: emp?.dateHired || "",
-      department: emp?.department || emp?.client || "",
-      position: emp?.position || "",
-      devices: [{
-        assignmentDate: (() => {
-          let dateToFormat = assigningDevice.assignmentDate || assignmentDate;
-          let formattedDate = "";
-          if (dateToFormat) {
-            const dateObj = new Date(dateToFormat);
-            if (!isNaN(dateObj)) {
-              formattedDate = dateObj.toLocaleString('en-US', {
-                year: 'numeric', month: 'long', day: '2-digit'
-              });
-            } else {
-              formattedDate = dateToFormat;
-            }
-          }
-          return formattedDate;
-        })(),
-        deviceType: assigningDevice.deviceType,
-        brand: assigningDevice.brand,
+  const handleTempDeployDone = async () => {
+    if (!selectedAssignEmployee || !assigningDevice) return;
+    try {
+      // Generate docx for temporary deploy
+      const response = await fetch(
+        "/src/AccountabilityForms/ASSET ACCOUNTABILITY FORM - NEW ISSUE.docx"
+      );
+      const content = await response.arrayBuffer();
+      const zip = new PizZip(content);
+      const doc = new Docxtemplater(zip, {
+        paragraphLoop: true,
+        linebreaks: true,
+      });
+      const emp = employees.find((e) => e.id === selectedAssignEmployee.id);
+      // Philippine date logic
+      const now = new Date();
+      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+      const phTime = new Date(utc + 8 * 60 * 60000); // GMT+8
+      const assignmentDate =
+        phTime.getFullYear() +
+        "-" +
+        String(phTime.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(phTime.getDate()).padStart(2, "0");
+      doc.setData({
+        name: emp?.fullName || "",
+        dateHired: emp?.dateHired || "",
+        department: emp?.department || emp?.client || "",
+        position: emp?.position || "",
+        devices: [
+          {
+            assignmentDate: (() => {
+              let dateToFormat =
+                assigningDevice.assignmentDate || assignmentDate;
+              let formattedDate = "";
+              if (dateToFormat) {
+                const dateObj = new Date(dateToFormat);
+                if (!isNaN(dateObj)) {
+                  formattedDate = dateObj.toLocaleString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "2-digit",
+                  });
+                } else {
+                  formattedDate = dateToFormat;
+                }
+              }
+              return formattedDate;
+            })(),
+            deviceType: assigningDevice.deviceType,
+            brand: assigningDevice.brand,
+            deviceTag: assigningDevice.deviceTag,
+            condition: assigningDevice.condition,
+            remarks: "temporary deployed",
+          },
+        ],
+        newIssueNewBoxRed: "",
+        newIssueNewBoxBlack: "☐",
+        newIssueStockBoxRed: "",
+        newIssueStockBoxBlack: "☐",
+        wfhNewBoxRed: "",
+        wfhNewBoxBlack: "☐",
+        wfhStockBoxRed: "",
+        wfhStockBoxBlack: "☐",
+      });
+      doc.render();
+      const out = doc.getZip().generate({ type: "blob" });
+      const employeeName = emp?.fullName
+        ? emp.fullName.replace(/[^a-zA-Z0-9\s-]/g, "").replace(/\s+/g, "_")
+        : "Employee";
+      const fileName = `${employeeName} - TEMPORARY DEPLOY.docx`;
+      saveAs(out, fileName);
+      await updateDevice(assigningDevice.id, {
+        ...assigningDevice,
+        assignedTo: selectedAssignEmployee.id,
+        assignmentDate: new Date().toISOString().slice(0, 10),
+        status: "In Use",
+      });
+      await logDeviceHistory({
+        employeeId: selectedAssignEmployee.id,
+        deviceId: assigningDevice.id,
         deviceTag: assigningDevice.deviceTag,
-        condition: assigningDevice.condition,
-        remarks: "temporary deployed",
-      }],
-      newIssueNewBoxRed: "",
-      newIssueNewBoxBlack: "☐",
-      newIssueStockBoxRed: "",
-      newIssueStockBoxBlack: "☐",
-      wfhNewBoxRed: "",
-      wfhNewBoxBlack: "☐",
-      wfhStockBoxRed: "",
-      wfhStockBoxBlack: "☐",
-    });
-    doc.render();
-    const out = doc.getZip().generate({ type: "blob" });
-    const employeeName = emp?.fullName ? emp.fullName.replace(/[^a-zA-Z0-9\s-]/g, "").replace(/\s+/g, "_") : "Employee";
-    const fileName = `${employeeName} - TEMPORARY DEPLOY.docx`;
-    saveAs(out, fileName);
-    await updateDevice(assigningDevice.id, {
-      ...assigningDevice,
-      assignedTo: selectedAssignEmployee.id,
-      assignmentDate: new Date().toISOString().slice(0, 10),
-      status: "In Use",
-    });
-    await logDeviceHistory({
-      employeeId: selectedAssignEmployee.id,
-      deviceId: assigningDevice.id,
-      deviceTag: assigningDevice.deviceTag,
-      action: "assigned (temporary)",
-      date: new Date().toISOString(),
-    });
-    closeAssignModal();
-    loadDevicesAndEmployees();
-  } catch (err) {
-    alert("Failed to assign device or generate document. Please try again.");
-  }
-};
-
+        action: "assigned (temporary)",
+        date: new Date().toISOString(),
+      });
+      closeAssignModal();
+      loadDevicesAndEmployees();
+    } catch (err) {
+      alert("Failed to assign device or generate document. Please try again.");
+    }
+  };
 
   // --- STATE ---
   const [devices, setDevices] = useState([]);
@@ -403,10 +530,16 @@ const handleTempDeployDone = async () => {
   const [assignModalOpen, setAssignModalOpen] = useState(false);
   const [assignSearch, setAssignSearch] = useState("");
   const [importing, setImporting] = useState(false);
-  const [importProgress, setImportProgress] = useState({ current: 0, total: 0 });
+  const [importProgress, setImportProgress] = useState({
+    current: 0,
+    total: 0,
+  });
   const [selectedIds, setSelectedIds] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
-  const [deleteProgress, setDeleteProgress] = useState({ current: 0, total: 0 });
+  const [deleteProgress, setDeleteProgress] = useState({
+    current: 0,
+    total: 0,
+  });
   // Add search state
   const [deviceSearch, setDeviceSearch] = useState("");
 
@@ -850,34 +983,44 @@ const handleTempDeployDone = async () => {
       setAssignModalProgress(30);
       const zip = new PizZip(content);
       setAssignModalProgress(40);
-      const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+      const doc = new Docxtemplater(zip, {
+        paragraphLoop: true,
+        linebreaks: true,
+      });
       setAssignModalProgress(50);
 
       const emp = employees.find((e) => e.id === selectedAssignEmployee.id);
       // Get all selected devices for assignment
-      const selectedDeviceObjects = devices.filter(d => selectedIds.includes(d.id));
+      const selectedDeviceObjects = devices.filter((d) =>
+        selectedIds.includes(d.id)
+      );
       // Philippine date logic
       const now = new Date();
       const utc = now.getTime() + now.getTimezoneOffset() * 60000;
       const phTime = new Date(utc + 8 * 60 * 60000); // GMT+8
-      const assignmentDate = phTime.getFullYear() + '-' +
-        String(phTime.getMonth() + 1).padStart(2, '0') + '-' +
-        String(phTime.getDate()).padStart(2, '0');
+      const assignmentDate =
+        phTime.getFullYear() +
+        "-" +
+        String(phTime.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(phTime.getDate()).padStart(2, "0");
 
       doc.setData({
         name: emp?.fullName || "",
         dateHired: emp?.dateHired || "",
         department: emp?.department || emp?.client || "",
         position: emp?.position || "",
-        devices: selectedDeviceObjects.map(dev => {
+        devices: selectedDeviceObjects.map((dev) => {
           // Format assignmentDate as 'June 06, 2025'
           let dateToFormat = dev.assignmentDate || assignmentDate;
           let formattedDate = "";
           if (dateToFormat) {
             const dateObj = new Date(dateToFormat);
             if (!isNaN(dateObj)) {
-              formattedDate = dateObj.toLocaleString('en-US', {
-                year: 'numeric', month: 'long', day: '2-digit'
+              formattedDate = dateObj.toLocaleString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "2-digit",
               });
             } else {
               formattedDate = dateToFormat;
@@ -889,7 +1032,9 @@ const handleTempDeployDone = async () => {
             brand: dev.brand,
             deviceTag: dev.deviceTag,
             condition: dev.condition,
-            remarks: assignModalChecks.temporaryDeploy ? "temporary deployed" : dev.remarks,
+            remarks: assignModalChecks.temporaryDeploy
+              ? "temporary deployed"
+              : dev.remarks,
           };
         }),
         // Dual placeholders for colored checkboxes
@@ -917,51 +1062,58 @@ const handleTempDeployDone = async () => {
   };
 
   // Download and assign devices when user clicks Download DOCX
-const handleDownloadAndAssign = async () => {
-  if (!assignModalDocxBlob) return;
-  const emp = employees.find((e) => e.id === selectedAssignEmployee.id);
-  const employeeName = emp?.fullName ? emp.fullName.replace(/[^a-zA-Z0-9\s-]/g, "").replace(/\s+/g, "_") : "Employee";
-  const fileName = `${employeeName} - NEW ISSUE.docx`;
-  saveAs(assignModalDocxBlob, fileName);
-  // Move assigned devices to assets (update their assignedTo, assignmentDate, status, remarks)
-  const now = new Date();
-  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-  const phTime = new Date(utc + 8 * 60 * 60000); // GMT+8
-  const assignmentDate = phTime.getFullYear() + '-' +
-    String(phTime.getMonth() + 1).padStart(2, '0') + '-' +
-    String(phTime.getDate()).padStart(2, '0');
-  for (const dev of devices.filter(d => selectedIds.includes(d.id))) {
-    await updateDevice(dev.id, {
-      ...dev,
-      assignedTo: selectedAssignEmployee.id,
-      assignmentDate,
-      status: "In Use",
-      remarks: assignModalChecks.temporaryDeploy ? "temporary deployed" : dev.remarks,
-    });
-    await logDeviceHistory({
-      employeeId: selectedAssignEmployee.id,
-      deviceId: dev.id,
-      deviceTag: dev.deviceTag,
-      action: "assigned",
-      date: new Date().toISOString(),
-    });
-  }
-  closeAssignModal();
-  loadDevicesAndEmployees();
-};
+  const handleDownloadAndAssign = async () => {
+    if (!assignModalDocxBlob) return;
+    const emp = employees.find((e) => e.id === selectedAssignEmployee.id);
+    const employeeName = emp?.fullName
+      ? emp.fullName.replace(/[^a-zA-Z0-9\s-]/g, "").replace(/\s+/g, "_")
+      : "Employee";
+    const fileName = `${employeeName} - NEW ISSUE.docx`;
+    saveAs(assignModalDocxBlob, fileName);
+    // Move assigned devices to assets (update their assignedTo, assignmentDate, status, remarks)
+    const now = new Date();
+    const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+    const phTime = new Date(utc + 8 * 60 * 60000); // GMT+8
+    const assignmentDate =
+      phTime.getFullYear() +
+      "-" +
+      String(phTime.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(phTime.getDate()).padStart(2, "0");
+    for (const dev of devices.filter((d) => selectedIds.includes(d.id))) {
+      await updateDevice(dev.id, {
+        ...dev,
+        assignedTo: selectedAssignEmployee.id,
+        assignmentDate,
+        status: "In Use",
+        remarks: assignModalChecks.temporaryDeploy
+          ? "temporary deployed"
+          : dev.remarks,
+      });
+      await logDeviceHistory({
+        employeeId: selectedAssignEmployee.id,
+        deviceId: dev.id,
+        deviceTag: dev.deviceTag,
+        action: "assigned",
+        date: new Date().toISOString(),
+      });
+    }
+    closeAssignModal();
+    loadDevicesAndEmployees();
+  };
 
   // --- END ASSIGN MODAL LOGIC ---
 
   // Handler for bulk assign
-const handleBulkAssign = () => {
-  if (selectedIds.length === 0) return;
-  // For now, open assign modal for the first selected device
-  const device = devices.find((d) => d.id === selectedIds[0]);
-  if (device) {
-    openAssignModal(device);
-  }
-  // If you want to support multi-assign, you can extend this logic
-};
+  const handleBulkAssign = () => {
+    if (selectedIds.length === 0) return;
+    // For now, open assign modal for the first selected device
+    const device = devices.find((d) => d.id === selectedIds[0]);
+    if (device) {
+      openAssignModal(device);
+    }
+    // If you want to support multi-assign, you can extend this logic
+  };
 
   return (
     <div style={styles.pageContainer}>
@@ -986,7 +1138,7 @@ const handleBulkAssign = () => {
             type="text"
             placeholder="Search devices..."
             value={deviceSearch}
-            onChange={e => setDeviceSearch(e.target.value)}
+            onChange={(e) => setDeviceSearch(e.target.value)}
             style={styles.googleSearchInput}
           />
         </div>
@@ -1021,14 +1173,28 @@ const handleBulkAssign = () => {
           </button>
         </label>
         <button
-          style={{ ...styles.button, background: selectedIds.length ? styles.button.background : styles.buttonDisabled.background, color: selectedIds.length ? styles.button.color : styles.buttonDisabled.color }}
+          style={{
+            ...styles.button,
+            background: selectedIds.length
+              ? styles.button.background
+              : styles.buttonDisabled.background,
+            color: selectedIds.length
+              ? styles.button.color
+              : styles.buttonDisabled.color,
+          }}
           disabled={selectedIds.length === 0}
           onClick={() => handleBulkAssign()}
         >
           Assign
         </button>
         <button
-          style={{ ...styles.button, background: selectedIds.length ? '#e57373' : styles.buttonDisabled.background, color: selectedIds.length ? '#fff' : styles.buttonDisabled.color }}
+          style={{
+            ...styles.button,
+            background: selectedIds.length
+              ? "#e57373"
+              : styles.buttonDisabled.background,
+            color: selectedIds.length ? "#fff" : styles.buttonDisabled.color,
+          }}
           disabled={selectedIds.length === 0 || deleteProgress.total > 0}
           onClick={handleBulkDelete}
         >
@@ -1110,7 +1276,7 @@ const handleBulkAssign = () => {
             <tbody>
               {devices
                 .filter((device) => !device.assignedTo)
-                .filter(device => {
+                .filter((device) => {
                   const q = deviceSearch.toLowerCase();
                   return (
                     device.deviceType?.toLowerCase().includes(q) ||
@@ -1146,24 +1312,33 @@ const handleBulkAssign = () => {
                     <td style={styles.td}>
                       {getEmployeeName(device.assignedTo)}
                     </td>
-                    <td style={styles.td}>{
-  device.assignmentDate
-    ? (() => {
-        const dateObj = new Date(device.assignmentDate);
-        if (isNaN(dateObj)) return device.assignmentDate;
-        return dateObj.toLocaleString('en-US', {
-          year: 'numeric', month: 'long', day: 'numeric'
-        });
-      })()
-    : ''
-}</td>
+                    <td style={styles.td}>
+                      {device.assignmentDate
+                        ? (() => {
+                            const dateObj = new Date(device.assignmentDate);
+                            if (isNaN(dateObj)) return device.assignmentDate;
+                            return dateObj.toLocaleString("en-US", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            });
+                          })()
+                        : ""}
+                    </td>
                     <td style={styles.td}>
                       {device.assignedTo ? "In Use" : "Stock Room"}
                     </td>
                     <td style={styles.td}>{device.condition}</td>
                     <td style={styles.td}>{device.remarks}</td>
                     <td style={styles.td}>
-                      <div style={{ display: "flex", gap: 24, alignItems: "center", justifyContent: "center" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: 24,
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
                         <button
                           style={{
                             width: 48,
@@ -1176,17 +1351,30 @@ const handleBulkAssign = () => {
                             borderRadius: 12,
                             background: "#eaf7fa",
                             cursor: "pointer",
-                            transition: "background 0.18s"
+                            transition: "background 0.18s",
                           }}
-                          onMouseEnter={e => e.currentTarget.style.background = "#d0f0f7"}
-                          onMouseLeave={e => e.currentTarget.style.background = "#eaf7fa"}
+                          onMouseEnter={(e) =>
+                            (e.currentTarget.style.background = "#d0f0f7")
+                          }
+                          onMouseLeave={(e) =>
+                            (e.currentTarget.style.background = "#eaf7fa")
+                          }
                           onClick={() => handleEdit(device)}
                           title="Edit"
                         >
-      <svg width="18" height="18" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-        <path d="M12 20h9"/>
-        <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
-      </svg>
+                          <svg
+                            width="18"
+                            height="18"
+                            fill="none"
+                            stroke="#2563eb"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M12 20h9" />
+                            <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+                          </svg>
                         </button>
                         <button
                           style={{
@@ -1200,19 +1388,32 @@ const handleBulkAssign = () => {
                             borderRadius: 12,
                             background: "#ffe9ec",
                             cursor: "pointer",
-                            transition: "background 0.18s"
+                            transition: "background 0.18s",
                           }}
-                          onMouseEnter={e => e.currentTarget.style.background = "#ffd6de"}
-                          onMouseLeave={e => e.currentTarget.style.background = "#ffe9ec"}
+                          onMouseEnter={(e) =>
+                            (e.currentTarget.style.background = "#ffd6de")
+                          }
+                          onMouseLeave={(e) =>
+                            (e.currentTarget.style.background = "#ffe9ec")
+                          }
                           onClick={() => handleDelete(device.id)}
                           title="Delete"
                         >
-      <svg width="18" height="18" fill="none" stroke="#e57373" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-        <polyline points="3 6 5 6 21 6"/>
-        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>
-        <line x1="10" y1="11" x2="10" y2="17"/>
-        <line x1="14" y1="11" x2="14" y2="17"/>
-      </svg>
+                          <svg
+                            width="18"
+                            height="18"
+                            fill="none"
+                            stroke="#e57373"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            viewBox="0 0 24 24"
+                          >
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+                            <line x1="10" y1="11" x2="10" y2="17" />
+                            <line x1="14" y1="11" x2="14" y2="17" />
+                          </svg>
                         </button>
                         {device.assignedTo && (
                           <button
@@ -1243,10 +1444,27 @@ const handleBulkAssign = () => {
                                 );
                               }
                             }}
-                            onMouseEnter={e => e.currentTarget.style.background = styles.iconButtonHover.background}
-                            onMouseLeave={e => e.currentTarget.style.background = styles.iconButton.background}
+                            onMouseEnter={(e) =>
+                              (e.currentTarget.style.background =
+                                styles.iconButtonHover.background)
+                            }
+                            onMouseLeave={(e) =>
+                              (e.currentTarget.style.background =
+                                styles.iconButton.background)
+                            }
                           >
-                            <svg width="18" height="18" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+                            <svg
+                              width="18"
+                              height="18"
+                              fill="none"
+                              stroke="#3b82f6"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M15 19l-7-7 7-7" />
+                            </svg>
                           </button>
                         )}
                       </div>
@@ -1264,7 +1482,9 @@ const handleBulkAssign = () => {
           <div style={styles.modalContent}>
             {assignModalStep === 1 && (
               <>
-                <h4 style={styles.modalTitle}>Assign Device: {assigningDevice.deviceTag}</h4>
+                <h4 style={styles.modalTitle}>
+                  Assign Device: {assigningDevice.deviceTag}
+                </h4>
                 <input
                   type="text"
                   placeholder="Search employee..."
@@ -1290,7 +1510,11 @@ const handleBulkAssign = () => {
                     .map((emp) => (
                       <li
                         key={emp.id}
-                        style={{ listStyle: "none", marginBottom: 8, width: "100%" }}
+                        style={{
+                          listStyle: "none",
+                          marginBottom: 8,
+                          width: "100%",
+                        }}
                       >
                         <button
                           style={{
@@ -1324,7 +1548,10 @@ const handleBulkAssign = () => {
             {assignModalStep === 2 && selectedAssignEmployee && (
               <>
                 <h4 style={styles.modalTitle}>
-                  Asset Accountability Form Options for: <span style={{ color: "#2563eb" }}>{selectedAssignEmployee.fullName}</span>
+                  Asset Accountability Form Options for:{" "}
+                  <span style={{ color: "#2563eb" }}>
+                    {selectedAssignEmployee.fullName}
+                  </span>
                 </h4>
                 <div style={styles.modalSection}>
                   <div style={styles.modalLabel}>New Issue:</div>
@@ -1336,7 +1563,8 @@ const handleBulkAssign = () => {
                         checked={assignModalChecks.newIssueNew}
                         onChange={handleAssignModalCheckbox}
                         style={styles.modalCheckbox}
-                      /> Newly Purchased
+                      />{" "}
+                      Newly Purchased
                     </label>
                     <label style={{ display: "flex", alignItems: "center" }}>
                       <input
@@ -1345,7 +1573,8 @@ const handleBulkAssign = () => {
                         checked={assignModalChecks.newIssueStock}
                         onChange={handleAssignModalCheckbox}
                         style={styles.modalCheckbox}
-                      /> Stock
+                      />{" "}
+                      Stock
                     </label>
                   </div>
                   <div style={styles.modalLabel}>Work From Home/Borrowed:</div>
@@ -1357,7 +1586,8 @@ const handleBulkAssign = () => {
                         checked={assignModalChecks.wfhNew}
                         onChange={handleAssignModalCheckbox}
                         style={styles.modalCheckbox}
-                      /> Newly Purchased
+                      />{" "}
+                      Newly Purchased
                     </label>
                     <label style={{ display: "flex", alignItems: "center" }}>
                       <input
@@ -1366,18 +1596,27 @@ const handleBulkAssign = () => {
                         checked={assignModalChecks.wfhStock}
                         onChange={handleAssignModalCheckbox}
                         style={styles.modalCheckbox}
-                      /> Stock
+                      />{" "}
+                      Stock
                     </label>
                   </div>
                   <div style={{ marginTop: 14 }}>
-                    <label style={{ display: "flex", alignItems: "center", fontWeight: 600, color: "#e57373" }}>
+                    <label
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        fontWeight: 600,
+                        color: "#e57373",
+                      }}
+                    >
                       <input
                         type="checkbox"
                         name="temporaryDeploy"
                         checked={assignModalChecks.temporaryDeploy}
                         onChange={handleAssignModalCheckbox}
                         style={styles.modalCheckbox}
-                      /> Temporary Deploy
+                      />{" "}
+                      Temporary Deploy
                     </label>
                   </div>
                 </div>
@@ -1414,13 +1653,19 @@ const handleBulkAssign = () => {
                             />
                           </div>
                           <span style={{ color: "#2563eb", fontWeight: 500 }}>
-                            Generating: {assignModalProgress < 100 ? `${assignModalProgress}%` : "Done"}
+                            Generating:{" "}
+                            {assignModalProgress < 100
+                              ? `${assignModalProgress}%`
+                              : "Done"}
                           </span>
                         </div>
                       )}
                       {!assignModalGenerating && !assignModalDocxBlob && (
                         <button
-                          style={{ ...styles.modalButton, background: "#22c55e" }}
+                          style={{
+                            ...styles.modalButton,
+                            background: "#22c55e",
+                          }}
                           onClick={handleAssignModalGenerateDocx}
                         >
                           Generate Asset Accountability Form
@@ -1460,7 +1705,7 @@ const styles = {
     maxWidth: "100%",
     background: "#f7f9fb",
     minHeight: "100vh",
-    fontFamily: 'Segoe UI, Arial, sans-serif',
+    fontFamily: "Segoe UI, Arial, sans-serif",
   },
   headerBar: {
     display: "flex",
@@ -1489,7 +1734,7 @@ const styles = {
     fontSize: 28,
     marginBottom: 18,
     letterSpacing: 1,
-    fontFamily: 'Segoe UI, Arial, sans-serif',
+    fontFamily: "Segoe UI, Arial, sans-serif",
   },
   googleSearchBar: {
     display: "flex",
@@ -1553,7 +1798,7 @@ const styles = {
     borderRadius: 16,
     boxShadow: "0 2px 12px rgba(68,95,109,0.10)",
     overflow: "hidden",
-    tableLayout: 'auto',
+    tableLayout: "auto",
   },
   th: {
     padding: "16px 12px",
@@ -1564,7 +1809,7 @@ const styles = {
     borderBottom: "2px solid #e0e7ef",
     textAlign: "left",
     letterSpacing: 0.2,
-    whiteSpace: 'nowrap',
+    whiteSpace: "nowrap",
   },
   td: {
     padding: "14px 12px",
@@ -1573,7 +1818,7 @@ const styles = {
     borderBottom: "1px solid #e0e7ef",
     background: "#f7f9fb",
     verticalAlign: "middle",
-    wordBreak: 'break-word',
+    wordBreak: "break-word",
   },
   iconButton: {
     background: "none",
