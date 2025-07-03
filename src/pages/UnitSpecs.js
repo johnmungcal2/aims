@@ -303,7 +303,16 @@ const UnitSpecs = () => {
   useEffect(() => {
     const handleClickOutside = () => {
       if (filterPopup.open) {
+<<<<<<< HEAD
         setFilterPopup({ open: false, column: null, table: null, anchor: null });
+=======
+        setFilterPopup({
+          open: false,
+          column: null,
+          table: null,
+          anchor: null,
+        });
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
       }
     };
     document.addEventListener("click", handleClickOutside);
@@ -372,7 +381,11 @@ const UnitSpecs = () => {
       if (name === "cpuGen" || name === "cpuModel") {
         newForm.CPU = `${newForm.cpuGen} - ${newForm.cpuModel}`.trim();
       }
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
       return newForm;
     });
   };
@@ -409,16 +422,26 @@ const UnitSpecs = () => {
     }
 
     // 3. Duplicate Tag validation
+<<<<<<< HEAD
     if (!editId) { // Only for new units
       const allUnits = [...inventory, ...deployed];
       const tagExists = allUnits.some(unit => unit.Tag === unitData.Tag);
+=======
+    if (!editId) {
+      // Only for new units
+      const allUnits = [...inventory, ...deployed];
+      const tagExists = allUnits.some((unit) => unit.Tag === unitData.Tag);
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
       if (tagExists) {
         toast.error(`Tag '${unitData.Tag}' already exists.`);
         return;
       }
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
     if (editId) {
       const collectionName = editCollection;
       await setDoc(doc(db, collectionName, unitData.Tag), unitData);
@@ -448,7 +471,13 @@ const UnitSpecs = () => {
     await deleteDoc(doc(db, from, unit.id));
     fetchData();
     toast.success(
+<<<<<<< HEAD
       `Unit ${unit.Tag} moved to ${to === "InventoryUnits" ? "Inventory" : "Deployed"}.`
+=======
+      `Unit ${unit.Tag} moved to ${
+        to === "InventoryUnits" ? "Inventory" : "Deployed"
+      }.`
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
     );
   };
 
@@ -858,7 +887,13 @@ const UnitSpecs = () => {
           <thead>
             <tr>
               {deleteMode.active && deleteMode.table === collectionName && (
+<<<<<<< HEAD
                 <th style={{ ...thModernStyle, width: 40, textAlign: "center" }}></th>
+=======
+                <th
+                  style={{ ...thModernStyle, width: 40, textAlign: "center" }}
+                ></th>
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
               )}
               {[
                 "Tag",
@@ -870,7 +905,14 @@ const UnitSpecs = () => {
                 "OS",
                 "Remarks",
               ].map((col) => (
+<<<<<<< HEAD
                 <th key={col} style={{ ...thModernStyle, position: "relative" }}>
+=======
+                <th
+                  key={col}
+                  style={{ ...thModernStyle, position: "relative" }}
+                >
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                   <span
                     // Remove filter for Tag column
                     onClick={
@@ -947,7 +989,12 @@ const UnitSpecs = () => {
                 <tr
                   key={unit.id}
                   style={
+<<<<<<< HEAD
                     hoveredRow.id === unit.id && hoveredRow.collection === collectionName
+=======
+                    hoveredRow.id === unit.id &&
+                    hoveredRow.collection === collectionName
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                       ? trHoverStyle
                       : undefined
                   }
@@ -971,7 +1018,12 @@ const UnitSpecs = () => {
                   <td style={tdModernStyle}>{unit.Tag}</td>
                   <td style={tdModernStyle}>{unit.CPU}</td>
                   <td style={tdModernStyle}>
+<<<<<<< HEAD
                     {unit.RAM && `${(unit.RAM || "").replace(/[^0-9]/g, "")} GB`}
+=======
+                    {unit.RAM &&
+                      `${(unit.RAM || "").replace(/[^0-9]/g, "")} GB`}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                   </td>
                   <td style={tdModernStyle}>{unit.Drive}</td>
                   <td style={tdModernStyle}>{unit.GPU}</td>
@@ -1075,7 +1127,15 @@ const UnitSpecs = () => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
+<<<<<<< HEAD
               style={{ ...modernActionBtn, background: "#e2e8f0", color: palette.text }}
+=======
+              style={{
+                ...modernActionBtn,
+                background: "#e2e8f0",
+                color: palette.text,
+              }}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             >
               Previous
             </button>
@@ -1092,7 +1152,15 @@ const UnitSpecs = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
+<<<<<<< HEAD
               style={{ ...modernActionBtn, background: "#e2e8f0", color: palette.text }}
+=======
+              style={{
+                ...modernActionBtn,
+                background: "#e2e8f0",
+                color: palette.text,
+              }}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             >
               Next
             </button>
@@ -1102,10 +1170,14 @@ const UnitSpecs = () => {
           deleteMode.table === collectionName &&
           selectedToDelete.length > 0 && (
             <div style={{ marginTop: 16 }}>
+<<<<<<< HEAD
               <button
                 style={modernDeleteBtn}
                 onClick={handleDeleteSelected}
               >
+=======
+              <button style={modernDeleteBtn} onClick={handleDeleteSelected}>
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                 Delete Selected
               </button>
               <button
@@ -1669,7 +1741,16 @@ const UnitSpecs = () => {
           {loading ? (
             <div style={{ textAlign: "center", padding: 30 }}>Loading...</div>
           ) : (
+<<<<<<< HEAD
             renderTable(inventory, "InventoryUnits", inventoryPage, setInventoryPage)
+=======
+            renderTable(
+              inventory,
+              "InventoryUnits",
+              inventoryPage,
+              setInventoryPage
+            )
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
           )}
         </div>
 
@@ -1690,7 +1771,16 @@ const UnitSpecs = () => {
           {loading ? (
             <div style={{ textAlign: "center", padding: 30 }}>Loading...</div>
           ) : (
+<<<<<<< HEAD
             renderTable(deployed, "DeployedUnits", deployedPage, setDeployedPage)
+=======
+            renderTable(
+              deployed,
+              "DeployedUnits",
+              deployedPage,
+              setDeployedPage
+            )
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
           )}
         </div>
       </div>

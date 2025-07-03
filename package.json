@@ -7,9 +7,14 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "cors": "^2.8.5",
     "cra-template": "1.3.0",
     "docxtemplater": "^3.65.0",
     "exceljs": "^4.4.0",
+<<<<<<< HEAD
+=======
+    "express": "^5.1.0",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
     "file-saver": "^2.0.5",
     "firebase": "^11.9.1",
     "firebase-admin": "^13.4.0",

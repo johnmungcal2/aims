@@ -27,7 +27,18 @@ function Header() {
           display: "block",
         }}
       />
+<<<<<<< HEAD
       <span style={{ color: "#fff", fontWeight: 700, fontSize: 15, letterSpacing: 0.5 }}>
+=======
+      <span
+        style={{
+          color: "#fff",
+          fontWeight: 700,
+          fontSize: 15,
+          letterSpacing: 0.5,
+        }}
+      >
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
         Assets & Inventory Management System
       </span>
     </header>
