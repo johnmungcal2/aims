@@ -159,6 +159,7 @@ function DeleteConfirmationModal({ onConfirm, onCancel }) {
 
 // SVG Icon components
 const EditIcon = ({ color = "#2563eb" }) => (
+<<<<<<< HEAD
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
     <path d="M14.85 3.15a1.5 1.5 0 0 1 2.12 2.12l-9.2 9.2-2.47.35.35-2.47 9.2-9.2Z" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
     <path d="M13.44 5.44l1.12 1.12" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -170,6 +171,60 @@ const DeleteIcon = ({ color = "#e11d48" }) => (
     <path d="M8 9v4M12 9v4" stroke={color} strokeWidth="1.5" strokeLinecap="round"/>
     <path d="M3 7h14" stroke={color} strokeWidth="1.5" strokeLinecap="round"/>
     <path d="M8.5 4h3a1 1 0 0 1 1 1V7h-5V5a1 1 0 0 1 1-1Z" stroke={color} strokeWidth="1.5"/>
+=======
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M14.85 3.15a1.5 1.5 0 0 1 2.12 2.12l-9.2 9.2-2.47.35.35-2.47 9.2-9.2Z"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M13.44 5.44l1.12 1.12"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+const DeleteIcon = ({ color = "#e11d48" }) => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    aria-hidden="true"
+  >
+    <rect
+      x="5"
+      y="7"
+      width="10"
+      height="8"
+      rx="2"
+      stroke={color}
+      strokeWidth="1.5"
+    />
+    <path
+      d="M8 9v4M12 9v4"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+    <path d="M3 7h14" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+    <path
+      d="M8.5 4h3a1 1 0 0 1 1 1V7h-5V5a1 1 0 0 1 1-1Z"
+      stroke={color}
+      strokeWidth="1.5"
+    />
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
   </svg>
 );
 
@@ -656,10 +711,41 @@ function Employees() {
             fill="none"
             style={{ marginRight: 2 }}
           >
+<<<<<<< HEAD
             <rect x="5.5" y="7.5" width="9" height="8" rx="2" stroke="#fff" strokeWidth="1.5" fill="none"/>
             <path d="M8 10v4M12 10v4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round"/>
             <path d="M3 7.5h14" stroke="#fff" strokeWidth="1.5" strokeLinecap="round"/>
             <path d="M8.5 4.5h3a1 1 0 0 1 1 1V7.5h-5V5.5a1 1 0 0 1 1-1z" stroke="#fff" strokeWidth="1.5" fill="none"/>
+=======
+            <rect
+              x="5.5"
+              y="7.5"
+              width="9"
+              height="8"
+              rx="2"
+              stroke="#fff"
+              strokeWidth="1.5"
+              fill="none"
+            />
+            <path
+              d="M8 10v4M12 10v4"
+              stroke="#fff"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+            <path
+              d="M3 7.5h14"
+              stroke="#fff"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+            <path
+              d="M8.5 4.5h3a1 1 0 0 1 1 1V7.5h-5V5.5a1 1 0 0 1 1-1z"
+              stroke="#fff"
+              strokeWidth="1.5"
+              fill="none"
+            />
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
           </svg>
           Delete Selected
         </button>
@@ -695,6 +781,7 @@ function Employees() {
               ...styles.modalContent,
               maxWidth: 900, // expanded for Actions column
               minWidth: 540, // slightly wider for comfort
+<<<<<<< HEAD
               width: '97vw', // responsive, but not full width
               maxHeight: '80vh',
               padding: '28px 24px',
@@ -702,26 +789,58 @@ function Employees() {
               flexDirection: 'column',
               alignItems: 'stretch',
               boxSizing: 'border-box',
+=======
+              width: "97vw", // responsive, but not full width
+              maxHeight: "80vh",
+              padding: "28px 24px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "stretch",
+              boxSizing: "border-box",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             }}
           >
             <h3
               style={{
+<<<<<<< HEAD
                 color: '#2563eb',
                 margin: '0 0 14px 0',
                 fontWeight: 700,
                 fontSize: 20,
                 textAlign: 'center',
+=======
+                color: "#2563eb",
+                margin: "0 0 14px 0",
+                fontWeight: 700,
+                fontSize: 20,
+                textAlign: "center",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                 letterSpacing: 1,
               }}
             >
               Devices Assigned to {selectedEmployee?.fullName}
             </h3>
+<<<<<<< HEAD
             <button onClick={handleShowHistory} style={{ ...styles.secondaryBtn, alignSelf: 'flex-end', marginBottom: 8, fontSize: 14, padding: '7px 16px', borderRadius: 7 }}>
+=======
+            <button
+              onClick={handleShowHistory}
+              style={{
+                ...styles.secondaryBtn,
+                alignSelf: "flex-end",
+                marginBottom: 8,
+                fontSize: 14,
+                padding: "7px 16px",
+                borderRadius: 7,
+              }}
+            >
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
               View History
             </button>
             <div
               style={{
                 flex: 1,
+<<<<<<< HEAD
                 overflowY: 'auto',
                 marginBottom: 10,
                 borderRadius: 12,
@@ -745,10 +864,38 @@ function Employees() {
                     background: '#fff',
                     borderRadius: 12,
                     tableLayout: 'fixed',
+=======
+                overflowY: "auto",
+                marginBottom: 10,
+                borderRadius: 12,
+                background: "#f7f9fb",
+                boxShadow: "0 1px 4px rgba(68,95,109,0.06)",
+                padding: 0,
+                minHeight: 80,
+                maxHeight: "48vh",
+                overflowX: "auto", // allow horizontal scroll if needed
+              }}
+            >
+              {devicesForEmployee.length === 0 ? (
+                <p style={{ textAlign: "center", margin: 24 }}>
+                  No devices assigned.
+                </p>
+              ) : (
+                <table
+                  style={{
+                    width: "100%",
+                    minWidth: 600, // reduce minWidth since fewer columns
+                    borderCollapse: "separate",
+                    borderSpacing: 0,
+                    background: "#fff",
+                    borderRadius: 12,
+                    tableLayout: "fixed",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                     fontSize: 14,
                   }}
                 >
                   <colgroup>
+<<<<<<< HEAD
                     <col style={{ width: '18%' }} />
                     <col style={{ width: '16%' }} />
                     <col style={{ width: '18%' }} />
@@ -764,31 +911,172 @@ function Employees() {
                       <th style={{ ...styles.th, fontSize: 14, padding: '10px 8px' }}>Model</th>
                       <th style={{ ...styles.th, fontSize: 14, padding: '10px 8px' }}>Condition</th>
                       <th style={{ ...styles.th, fontSize: 14, padding: '10px 8px' }}>Assignment Date</th>
+=======
+                    <col style={{ width: "18%" }} />
+                    <col style={{ width: "16%" }} />
+                    <col style={{ width: "18%" }} />
+                    <col style={{ width: "18%" }} />
+                    <col style={{ width: "15%" }} />
+                    <col style={{ width: "15%" }} />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th
+                        style={{
+                          ...styles.th,
+                          fontSize: 14,
+                          padding: "10px 8px",
+                        }}
+                      >
+                        Tag
+                      </th>
+                      <th
+                        style={{
+                          ...styles.th,
+                          fontSize: 14,
+                          padding: "10px 8px",
+                        }}
+                      >
+                        Type
+                      </th>
+                      <th
+                        style={{
+                          ...styles.th,
+                          fontSize: 14,
+                          padding: "10px 8px",
+                        }}
+                      >
+                        Brand
+                      </th>
+                      <th
+                        style={{
+                          ...styles.th,
+                          fontSize: 14,
+                          padding: "10px 8px",
+                        }}
+                      >
+                        Model
+                      </th>
+                      <th
+                        style={{
+                          ...styles.th,
+                          fontSize: 14,
+                          padding: "10px 8px",
+                        }}
+                      >
+                        Condition
+                      </th>
+                      <th
+                        style={{
+                          ...styles.th,
+                          fontSize: 14,
+                          padding: "10px 8px",
+                        }}
+                      >
+                        Assignment Date
+                      </th>
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                     </tr>
                   </thead>
                   <tbody>
                     {devicesForEmployee.map((dev) => (
                       <tr key={dev.id}>
+<<<<<<< HEAD
                         <td style={{ ...styles.td, fontWeight: 600, fontSize: 14, padding: '10px 8px' }}>{dev.deviceTag}</td>
                         <td style={{ ...styles.td, fontSize: 14, padding: '10px 8px' }}>{dev.deviceType}</td>
                         <td style={{ ...styles.td, fontSize: 14, padding: '10px 8px' }}>{dev.brand}</td>
                         <td style={{ ...styles.td, fontSize: 14, padding: '10px 8px' }}>{dev.model}</td>
                         <td style={{ ...styles.td, fontSize: 14, padding: '10px 8px' }}>{dev.condition}</td>
                         <td style={{ ...styles.td, fontSize: 14, padding: '10px 8px' }}>{dev.assignmentDate || ''}</td>
+=======
+                        <td
+                          style={{
+                            ...styles.td,
+                            fontWeight: 600,
+                            fontSize: 14,
+                            padding: "10px 8px",
+                          }}
+                        >
+                          {dev.deviceTag}
+                        </td>
+                        <td
+                          style={{
+                            ...styles.td,
+                            fontSize: 14,
+                            padding: "10px 8px",
+                          }}
+                        >
+                          {dev.deviceType}
+                        </td>
+                        <td
+                          style={{
+                            ...styles.td,
+                            fontSize: 14,
+                            padding: "10px 8px",
+                          }}
+                        >
+                          {dev.brand}
+                        </td>
+                        <td
+                          style={{
+                            ...styles.td,
+                            fontSize: 14,
+                            padding: "10px 8px",
+                          }}
+                        >
+                          {dev.model}
+                        </td>
+                        <td
+                          style={{
+                            ...styles.td,
+                            fontSize: 14,
+                            padding: "10px 8px",
+                          }}
+                        >
+                          {dev.condition}
+                        </td>
+                        <td
+                          style={{
+                            ...styles.td,
+                            fontSize: 14,
+                            padding: "10px 8px",
+                          }}
+                        >
+                          {dev.assignmentDate || ""}
+                        </td>
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                       </tr>
                     ))}
                   </tbody>
                 </table>
               )}
             </div>
+<<<<<<< HEAD
             <button onClick={handleCloseDevicesModal} style={{ ...styles.cancelBtn, marginTop: 8, alignSelf: 'flex-end', fontSize: 14, padding: '8px 18px', borderRadius: 7 }}>
+=======
+            <button
+              onClick={handleCloseDevicesModal}
+              style={{
+                ...styles.cancelBtn,
+                marginTop: 8,
+                alignSelf: "flex-end",
+                fontSize: 14,
+                padding: "8px 18px",
+                borderRadius: 7,
+              }}
+            >
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
               Close
             </button>
             {/* Assign Modal */}
             {assignModalOpen && assigningDevice && (
               <div style={{ ...styles.modalOverlay, zIndex: 1100 }}>
                 <div style={{ ...styles.modalContent, minWidth: 350 }}>
+<<<<<<< HEAD
                   <h4 style={{ color: '#2563eb' }}>
+=======
+                  <h4 style={{ color: "#2563eb" }}>
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                     Assign Device: {assigningDevice.deviceTag}
                   </h4>
                   <input
@@ -796,12 +1084,20 @@ function Employees() {
                     placeholder="Search employee..."
                     value={assignSearch}
                     onChange={(e) => setAssignSearch(e.target.value)}
+<<<<<<< HEAD
                     style={{ width: '100%', marginBottom: 8, padding: 6 }}
+=======
+                    style={{ width: "100%", marginBottom: 8, padding: 6 }}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                   />
                   <ul
                     style={{
                       maxHeight: 200,
+<<<<<<< HEAD
                       overflowY: 'auto',
+=======
+                      overflowY: "auto",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                       padding: 0,
                       margin: 0,
                     }}
@@ -816,6 +1112,7 @@ function Employees() {
                       .map((emp) => (
                         <li
                           key={emp.id}
+<<<<<<< HEAD
                           style={{ listStyle: 'none', marginBottom: 8 }}
                         >
                           <button
@@ -827,6 +1124,19 @@ function Employees() {
                               border: '1px solid #e5e7eb',
                               background: '#f8fafc',
                               cursor: 'pointer',
+=======
+                          style={{ listStyle: "none", marginBottom: 8 }}
+                        >
+                          <button
+                            style={{
+                              width: "100%",
+                              textAlign: "left",
+                              padding: 8,
+                              borderRadius: 6,
+                              border: "1px solid #e5e7eb",
+                              background: "#f8fafc",
+                              cursor: "pointer",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                             }}
                             onClick={async () => {
                               try {
@@ -845,7 +1155,11 @@ function Employees() {
                                     employeeId: assigningDevice.assignedTo,
                                     deviceId: assigningDevice.id,
                                     deviceTag: assigningDevice.deviceTag,
+<<<<<<< HEAD
                                     action: 'unassigned',
+=======
+                                    action: "unassigned",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                                     reason: `Reassigned to ${emp.fullName}`,
                                     condition: assigningDevice.condition,
                                     date: new Date().toISOString(),
@@ -866,7 +1180,11 @@ function Employees() {
                                     employeeId: emp.id,
                                     deviceId: assigningDevice.id,
                                     deviceTag: assigningDevice.deviceTag,
+<<<<<<< HEAD
                                     action: 'assigned',
+=======
+                                    action: "assigned",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                                     reason: `Received from reassignment (${prevEmpName})`,
                                     date: new Date().toISOString(),
                                   });
@@ -885,8 +1203,13 @@ function Employees() {
                                     employeeId: emp.id,
                                     deviceId: assigningDevice.id,
                                     deviceTag: assigningDevice.deviceTag,
+<<<<<<< HEAD
                                     action: 'assigned',
                                     reason: 'assigned',
+=======
+                                    action: "assigned",
+                                    reason: "assigned",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                                     date: new Date().toISOString(),
                                   });
                                 }
@@ -901,7 +1224,11 @@ function Employees() {
                                 setAssignSearch("");
                               } catch (err) {
                                 alert(
+<<<<<<< HEAD
                                   'Failed to assign device. Please try again.'
+=======
+                                  "Failed to assign device. Please try again."
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                                 );
                               }
                             }}
@@ -992,6 +1319,7 @@ function Employees() {
               ...styles.modalContent,
               maxWidth: 820, // expanded for Delete column
               minWidth: 520, // slightly wider for comfort
+<<<<<<< HEAD
               width: '96vw', // responsive, but not full width
               maxHeight: '80vh',
               padding: '32px 32px',
@@ -999,15 +1327,32 @@ function Employees() {
               flexDirection: 'column',
               alignItems: 'stretch',
               boxSizing: 'border-box',
+=======
+              width: "96vw", // responsive, but not full width
+              maxHeight: "80vh",
+              padding: "32px 32px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "stretch",
+              boxSizing: "border-box",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             }}
           >
             <h3
               style={{
+<<<<<<< HEAD
                 color: '#2563eb',
                 margin: '0 0 18px 0',
                 fontWeight: 700,
                 fontSize: 22,
                 textAlign: 'center',
+=======
+                color: "#2563eb",
+                margin: "0 0 18px 0",
+                fontWeight: 700,
+                fontSize: 22,
+                textAlign: "center",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                 letterSpacing: 1,
               }}
             >
@@ -1016,6 +1361,7 @@ function Employees() {
             <div
               style={{
                 flex: 1,
+<<<<<<< HEAD
                 overflowY: 'auto',
                 marginBottom: 12,
                 borderRadius: 12,
@@ -1041,10 +1387,40 @@ function Employees() {
                     background: '#fff',
                     borderRadius: 12,
                     tableLayout: 'fixed',
+=======
+                overflowY: "auto",
+                marginBottom: 12,
+                borderRadius: 12,
+                background: "#f7f9fb",
+                boxShadow: "0 1px 4px rgba(68,95,109,0.06)",
+                padding: 0,
+                minHeight: 120,
+                maxHeight: "48vh",
+                overflowX: "auto", // allow horizontal scroll if needed
+              }}
+            >
+              {loadingHistory ? (
+                <p style={{ textAlign: "center", margin: 32 }}>Loading...</p>
+              ) : history.length === 0 ? (
+                <p style={{ textAlign: "center", margin: 32 }}>
+                  No history found.
+                </p>
+              ) : (
+                <table
+                  style={{
+                    width: "100%",
+                    minWidth: 700, // ensure table doesn't shrink too much
+                    borderCollapse: "separate",
+                    borderSpacing: 0,
+                    background: "#fff",
+                    borderRadius: 12,
+                    tableLayout: "fixed",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                     fontSize: 15,
                   }}
                 >
                   <colgroup>
+<<<<<<< HEAD
                     <col style={{ width: '20%' }} />
                     <col style={{ width: '13%' }} />
                     <col style={{ width: '22%' }} />
@@ -1058,11 +1434,68 @@ function Employees() {
                       <th style={{ ...styles.th, fontSize: 15, padding: '10px 8px' }}>Date</th>
                       <th style={{ ...styles.th, fontSize: 15, padding: '10px 8px' }}>Reason</th>
                       <th style={{ ...styles.th, fontSize: 15, padding: '10px 8px', textAlign: 'center' }}>Delete</th>
+=======
+                    <col style={{ width: "20%" }} />
+                    <col style={{ width: "13%" }} />
+                    <col style={{ width: "22%" }} />
+                    <col style={{ width: "33%" }} />
+                    <col style={{ width: "12%" }} />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th
+                        style={{
+                          ...styles.th,
+                          fontSize: 15,
+                          padding: "10px 8px",
+                        }}
+                      >
+                        Device Tag
+                      </th>
+                      <th
+                        style={{
+                          ...styles.th,
+                          fontSize: 15,
+                          padding: "10px 8px",
+                        }}
+                      >
+                        Action
+                      </th>
+                      <th
+                        style={{
+                          ...styles.th,
+                          fontSize: 15,
+                          padding: "10px 8px",
+                        }}
+                      >
+                        Date
+                      </th>
+                      <th
+                        style={{
+                          ...styles.th,
+                          fontSize: 15,
+                          padding: "10px 8px",
+                        }}
+                      >
+                        Reason
+                      </th>
+                      <th
+                        style={{
+                          ...styles.th,
+                          fontSize: 15,
+                          padding: "10px 8px",
+                          textAlign: "center",
+                        }}
+                      >
+                        Delete
+                      </th>
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                     </tr>
                   </thead>
                   <tbody>
                     {history.map((h) => (
                       <tr key={h.id}>
+<<<<<<< HEAD
                         <td style={{ ...styles.td, fontWeight: 600, fontSize: 15, padding: '10px 8px' }}>{h.deviceTag}</td>
                         <td style={{ ...styles.td, fontSize: 15, padding: '10px 8px' }}>{h.action}</td>
                         <td style={{ ...styles.td, fontSize: 15, padding: '10px 8px' }}>{new Date(h.date).toLocaleString()}</td>
@@ -1071,6 +1504,62 @@ function Employees() {
                           <button
                             onClick={() => handleDeleteHistory(h.id)}
                             style={{ ...styles.deleteBtn, minWidth: 48, minHeight: 28, padding: '6px 0', fontSize: 13, borderRadius: 7 }}
+=======
+                        <td
+                          style={{
+                            ...styles.td,
+                            fontWeight: 600,
+                            fontSize: 15,
+                            padding: "10px 8px",
+                          }}
+                        >
+                          {h.deviceTag}
+                        </td>
+                        <td
+                          style={{
+                            ...styles.td,
+                            fontSize: 15,
+                            padding: "10px 8px",
+                          }}
+                        >
+                          {h.action}
+                        </td>
+                        <td
+                          style={{
+                            ...styles.td,
+                            fontSize: 15,
+                            padding: "10px 8px",
+                          }}
+                        >
+                          {new Date(h.date).toLocaleString()}
+                        </td>
+                        <td
+                          style={{
+                            ...styles.td,
+                            fontSize: 15,
+                            padding: "10px 8px",
+                          }}
+                        >
+                          {h.reason || "-"}
+                        </td>
+                        <td
+                          style={{
+                            ...styles.td,
+                            textAlign: "center",
+                            padding: "10px 8px",
+                          }}
+                        >
+                          <button
+                            onClick={() => handleDeleteHistory(h.id)}
+                            style={{
+                              ...styles.deleteBtn,
+                              minWidth: 48,
+                              minHeight: 28,
+                              padding: "6px 0",
+                              fontSize: 13,
+                              borderRadius: 7,
+                            }}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                           >
                             Delete
                           </button>
@@ -1083,7 +1572,15 @@ function Employees() {
             </div>
             <button
               onClick={() => setShowHistoryModal(false)}
+<<<<<<< HEAD
               style={{ ...styles.cancelBtn, marginTop: 8, alignSelf: 'flex-end' }}
+=======
+              style={{
+                ...styles.cancelBtn,
+                marginTop: 8,
+                alignSelf: "flex-end",
+              }}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             >
               Close
             </button>
@@ -1195,8 +1692,17 @@ function Employees() {
                           cursor: "pointer",
                           transition: "background 0.18s",
                         }}
+<<<<<<< HEAD
                         onMouseEnter={(e) => (e.currentTarget.style.background = "#d0f0f7")}
                         onMouseLeave={(e) => (e.currentTarget.style.background = "#eaf7fa")}
+=======
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.background = "#d0f0f7")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.background = "#eaf7fa")
+                        }
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                         onClick={() => handleEdit(emp)}
                         title="Edit"
                       >
@@ -1228,8 +1734,17 @@ function Employees() {
                           cursor: "pointer",
                           transition: "background 0.18s",
                         }}
+<<<<<<< HEAD
                         onMouseEnter={(e) => (e.currentTarget.style.background = "#ffd6de")}
                         onMouseLeave={(e) => (e.currentTarget.style.background = "#ffe9ec")}
+=======
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.background = "#ffd6de")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.background = "#ffe9ec")
+                        }
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                         onClick={() => handleDelete(emp.id)}
                         title="Delete"
                       >
@@ -1401,7 +1916,12 @@ const styles = {
     fontSize: 13,
     cursor: "pointer",
     marginLeft: 0,
+<<<<<<< HEAD
     transition: "background 0.18s, box-shadow 0.18s, color 0.18s, opacity 0.18s",
+=======
+    transition:
+      "background 0.18s, box-shadow 0.18s, color 0.18s, opacity 0.18s",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
     minWidth: 36,
     minHeight: 28,
     display: "inline-block",

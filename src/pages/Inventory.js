@@ -79,11 +79,25 @@ function DeviceFormModal({
   return (
     <div style={styles.modalOverlay}>
       <div style={styles.inventoryModalContent}>
+<<<<<<< HEAD
         <h3 style={styles.inventoryModalTitle}>{data.id ? "Edit Device" : "Add Device"}</h3>
         
         {/* Row 1: Device Type and Brand */}
         <div style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}>
           <div style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}>
+=======
+        <h3 style={styles.inventoryModalTitle}>
+          {data.id ? "Edit Device" : "Add Device"}
+        </h3>
+
+        {/* Row 1: Device Type and Brand */}
+        <div
+          style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}
+        >
+          <div
+            style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}
+          >
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             <label style={styles.inventoryLabel}>Device Type:</label>
             <select
               name="deviceType"
@@ -99,8 +113,15 @@ function DeviceFormModal({
               ))}
             </select>
           </div>
+<<<<<<< HEAD
           
           <div style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}>
+=======
+
+          <div
+            style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}
+          >
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             <label style={styles.inventoryLabel}>Brand:</label>
             <input
               name="brand"
@@ -116,12 +137,35 @@ function DeviceFormModal({
         {data.deviceType && (
           <div style={{ ...styles.inventoryInputGroup, marginBottom: 12 }}>
             <label style={styles.inventoryLabel}>Device Tag:</label>
+<<<<<<< HEAD
             <div style={{ display: "flex", gap: 10, alignItems: "center", width: "100%" }}>
               {!useSerial ? (
                 <>
                   <span style={{ fontWeight: 600, fontSize: 14, color: "#2563eb", minWidth: "fit-content" }}>{`JOII${
                     deviceTypes.find((t) => t.label === data.deviceType)?.code ||
                     ""
+=======
+            <div
+              style={{
+                display: "flex",
+                gap: 10,
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              {!useSerial ? (
+                <>
+                  <span
+                    style={{
+                      fontWeight: 600,
+                      fontSize: 14,
+                      color: "#2563eb",
+                      minWidth: "fit-content",
+                    }}
+                  >{`JOII${
+                    deviceTypes.find((t) => t.label === data.deviceType)
+                      ?.code || ""
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                   }`}</span>
                   <input
                     name="deviceTagDigits"
@@ -144,16 +188,41 @@ function DeviceFormModal({
                         },
                       });
                     }}
+<<<<<<< HEAD
                     style={{ width: 70, padding: "8px 12px", borderRadius: 6, border: '1.5px solid #cbd5e1', background: '#f1f5f9', fontSize: 14, height: "36px", boxSizing: "border-box" }}
+=======
+                    style={{
+                      width: 70,
+                      padding: "8px 12px",
+                      borderRadius: 6,
+                      border: "1.5px solid #cbd5e1",
+                      background: "#f1f5f9",
+                      fontSize: 14,
+                      height: "36px",
+                      boxSizing: "border-box",
+                    }}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                     maxLength={4}
                     pattern="\\d{0,4}"
                     placeholder="0001"
                   />
+<<<<<<< HEAD
                   <button type="button" onClick={onGenerateTag} style={{
                     ...styles.inventoryModalButtonSmall,
                     padding: "6px 12px",
                     fontSize: 13
                   }}>
+=======
+                  <button
+                    type="button"
+                    onClick={onGenerateTag}
+                    style={{
+                      ...styles.inventoryModalButtonSmall,
+                      padding: "6px 12px",
+                      fontSize: 13,
+                    }}
+                  >
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                     Generate
                   </button>
                 </>
@@ -163,13 +232,39 @@ function DeviceFormModal({
                   name="deviceTag"
                   value={data.deviceTag}
                   onChange={onChange}
+<<<<<<< HEAD
                   style={{ flex: 1, padding: "8px 12px", borderRadius: 6, border: '1.5px solid #cbd5e1', background: '#f1f5f9', fontSize: 14, height: "36px", boxSizing: "border-box" }}
+=======
+                  style={{
+                    flex: 1,
+                    padding: "8px 12px",
+                    borderRadius: 6,
+                    border: "1.5px solid #cbd5e1",
+                    background: "#f1f5f9",
+                    fontSize: 14,
+                    height: "36px",
+                    boxSizing: "border-box",
+                  }}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                   maxLength={64}
                   placeholder="Enter Serial Number"
                 />
               )}
             </div>
+<<<<<<< HEAD
             <label style={{ marginTop: 8, display: "flex", alignItems: "center", fontWeight: 400, fontSize: 13, color: "#222e3a" }}>
+=======
+            <label
+              style={{
+                marginTop: 8,
+                display: "flex",
+                alignItems: "center",
+                fontWeight: 400,
+                fontSize: 13,
+                color: "#222e3a",
+              }}
+            >
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
               <input
                 type="checkbox"
                 checked={useSerial}
@@ -179,17 +274,51 @@ function DeviceFormModal({
               Use Serial Number Instead
             </label>
             {tagError && (
+<<<<<<< HEAD
               <span style={{ color: "#e57373", fontSize: 12, marginTop: 4, display: "block" }}>{tagError}</span>
             )}
             {saveError && (
               <span style={{ color: "#e57373", fontSize: 12, marginTop: 4, display: "block" }}>{saveError}</span>
+=======
+              <span
+                style={{
+                  color: "#e57373",
+                  fontSize: 12,
+                  marginTop: 4,
+                  display: "block",
+                }}
+              >
+                {tagError}
+              </span>
+            )}
+            {saveError && (
+              <span
+                style={{
+                  color: "#e57373",
+                  fontSize: 12,
+                  marginTop: 4,
+                  display: "block",
+                }}
+              >
+                {saveError}
+              </span>
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             )}
           </div>
         )}
 
         {/* Row 3: Model and Condition */}
+<<<<<<< HEAD
         <div style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}>
           <div style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}>
+=======
+        <div
+          style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}
+        >
+          <div
+            style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}
+          >
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             <label style={styles.inventoryLabel}>Model:</label>
             <input
               name="model"
@@ -198,8 +327,15 @@ function DeviceFormModal({
               style={styles.inventoryInput}
             />
           </div>
+<<<<<<< HEAD
           
           <div style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}>
+=======
+
+          <div
+            style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}
+          >
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             <label style={styles.inventoryLabel}>Condition:</label>
             <select
               name="condition"
@@ -217,6 +353,7 @@ function DeviceFormModal({
           </div>
         </div>
 
+<<<<<<< HEAD
         {/* Row 4: Remarks only (removed Assigned To and Assignment Date) */}
         <div style={{ ...styles.inventoryInputGroup, marginBottom: 12 }}>
           <label style={styles.inventoryLabel}>Remarks:</label>
@@ -254,6 +391,123 @@ function DeviceFormModal({
             padding: "10px 24px",
             fontSize: 14
           }}>
+=======
+        {/* Row 4: Quantity (if not editing) and Assigned To */}
+        <div
+          style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}
+        >
+          {!isEditMode && (
+            <div
+              style={{
+                ...styles.inventoryInputGroup,
+                flex: 1,
+                marginBottom: 0,
+              }}
+            >
+              <label style={styles.inventoryLabel}>Quantity:</label>
+              <input
+                name="quantity"
+                type="number"
+                min="1"
+                value={data.quantity}
+                onChange={onChange}
+                style={styles.inventoryInput}
+              />
+            </div>
+          )}
+
+          <div
+            style={{ ...styles.inventoryInputGroup, flex: 1, marginBottom: 0 }}
+          >
+            <label style={styles.inventoryLabel}>Assigned To:</label>
+            <select
+              name="assignedTo"
+              value={data.assignedTo}
+              onChange={onChange}
+              style={styles.inventoryInput}
+            >
+              <option value="">Select Employee</option>
+              {employees.map((emp) => (
+                <option key={emp.id} value={emp.id}>
+                  {emp.fullName}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Row 5: Assignment Date and Remarks */}
+        <div
+          style={{ display: "flex", gap: 16, width: "100%", marginBottom: 12 }}
+        >
+          {data.assignedTo && (
+            <div
+              style={{
+                ...styles.inventoryInputGroup,
+                flex: 1,
+                marginBottom: 0,
+              }}
+            >
+              <label style={styles.inventoryLabel}>Assignment Date:</label>
+              <input
+                type="date"
+                name="assignmentDate"
+                value={data.assignmentDate || ""}
+                onChange={onChange}
+                style={styles.inventoryInput}
+              />
+            </div>
+          )}
+
+          <div
+            style={{
+              ...styles.inventoryInputGroup,
+              flex: data.assignedTo ? 1 : 2,
+              marginBottom: 0,
+            }}
+          >
+            <label style={styles.inventoryLabel}>Remarks:</label>
+            <input
+              name="remarks"
+              value={data.remarks}
+              onChange={onChange}
+              style={styles.inventoryInput}
+            />
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div
+          style={{
+            marginTop: 16,
+            display: "flex",
+            justifyContent: "center",
+            gap: 10,
+            width: "100%",
+          }}
+        >
+          <button
+            onClick={onSave}
+            disabled={!isValid}
+            style={{
+              ...styles.inventoryModalButton,
+              opacity: isValid ? 1 : 0.6,
+              cursor: isValid ? "pointer" : "not-allowed",
+              padding: "10px 24px",
+              fontSize: 14,
+            }}
+          >
+            Save
+          </button>
+          <button
+            onClick={onCancel}
+            style={{
+              ...styles.inventoryModalButtonSecondary,
+              padding: "10px 24px",
+              fontSize: 14,
+            }}
+          >
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             Cancel
           </button>
         </div>
@@ -263,6 +517,7 @@ function DeviceFormModal({
 }
 
 function Inventory() {
+<<<<<<< HEAD
 
   // Add this function inside your Inventory component, before the return statement:
 const handleTempDeployDone = async () => {
@@ -344,6 +599,100 @@ const handleTempDeployDone = async () => {
   }
 };
 
+=======
+  // Add this function inside your Inventory component, before the return statement:
+  const handleTempDeployDone = async () => {
+    if (!selectedAssignEmployee || !assigningDevice) return;
+    try {
+      // Generate docx for temporary deploy
+      const response = await fetch(
+        "/src/AccountabilityForms/ASSET ACCOUNTABILITY FORM - NEW ISSUE.docx"
+      );
+      const content = await response.arrayBuffer();
+      const zip = new PizZip(content);
+      const doc = new Docxtemplater(zip, {
+        paragraphLoop: true,
+        linebreaks: true,
+      });
+      const emp = employees.find((e) => e.id === selectedAssignEmployee.id);
+      // Philippine date logic
+      const now = new Date();
+      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+      const phTime = new Date(utc + 8 * 60 * 60000); // GMT+8
+      const assignmentDate =
+        phTime.getFullYear() +
+        "-" +
+        String(phTime.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(phTime.getDate()).padStart(2, "0");
+      doc.setData({
+        name: emp?.fullName || "",
+        dateHired: emp?.dateHired || "",
+        department: emp?.department || emp?.client || "",
+        position: emp?.position || "",
+        devices: [
+          {
+            assignmentDate: (() => {
+              let dateToFormat =
+                assigningDevice.assignmentDate || assignmentDate;
+              let formattedDate = "";
+              if (dateToFormat) {
+                const dateObj = new Date(dateToFormat);
+                if (!isNaN(dateObj)) {
+                  formattedDate = dateObj.toLocaleString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "2-digit",
+                  });
+                } else {
+                  formattedDate = dateToFormat;
+                }
+              }
+              return formattedDate;
+            })(),
+            deviceType: assigningDevice.deviceType,
+            brand: assigningDevice.brand,
+            deviceTag: assigningDevice.deviceTag,
+            condition: assigningDevice.condition,
+            remarks: "temporary deployed",
+          },
+        ],
+        newIssueNewBoxRed: "",
+        newIssueNewBoxBlack: "☐",
+        newIssueStockBoxRed: "",
+        newIssueStockBoxBlack: "☐",
+        wfhNewBoxRed: "",
+        wfhNewBoxBlack: "☐",
+        wfhStockBoxRed: "",
+        wfhStockBoxBlack: "☐",
+      });
+      doc.render();
+      const out = doc.getZip().generate({ type: "blob" });
+      const employeeName = emp?.fullName
+        ? emp.fullName.replace(/[^a-zA-Z0-9\s-]/g, "").replace(/\s+/g, "_")
+        : "Employee";
+      const fileName = `${employeeName} - TEMPORARY DEPLOY.docx`;
+      saveAs(out, fileName);
+      await updateDevice(assigningDevice.id, {
+        ...assigningDevice,
+        assignedTo: selectedAssignEmployee.id,
+        assignmentDate: new Date().toISOString().slice(0, 10),
+        status: "In Use",
+      });
+      await logDeviceHistory({
+        employeeId: selectedAssignEmployee.id,
+        deviceId: assigningDevice.id,
+        deviceTag: assigningDevice.deviceTag,
+        action: "assigned (temporary)",
+        date: new Date().toISOString(),
+      });
+      closeAssignModal();
+      loadDevicesAndEmployees();
+    } catch (err) {
+      alert("Failed to assign device or generate document. Please try again.");
+    }
+  };
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
 
   // --- STATE ---
   const [devices, setDevices] = useState([]);
@@ -358,6 +707,7 @@ const handleTempDeployDone = async () => {
   const [assignModalOpen, setAssignModalOpen] = useState(false);
   const [assignSearch, setAssignSearch] = useState("");
   const [importing, setImporting] = useState(false);
+<<<<<<< HEAD
   const [importProgress, setImportProgress] = useState({ current: 0, total: 0 });
   const [selectedIds, setSelectedIds] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
@@ -365,6 +715,34 @@ const handleTempDeployDone = async () => {
   // Add search state
   const [deviceSearch, setDeviceSearch] = useState("");
 
+=======
+  const [importProgress, setImportProgress] = useState({
+    current: 0,
+    total: 0,
+  });
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
+  const [deleteProgress, setDeleteProgress] = useState({
+    current: 0,
+    total: 0,
+  });
+  // Add search state
+  const [deviceSearch, setDeviceSearch] = useState("");
+
+  // --- FILTERED DEVICES (for table and select all logic) ---
+  const filteredDevices = devices.filter((device) => {
+    const q = deviceSearch.toLowerCase();
+    return (
+      device.deviceType?.toLowerCase().includes(q) ||
+      device.deviceTag?.toLowerCase().includes(q) ||
+      device.brand?.toLowerCase().includes(q) ||
+      device.model?.toLowerCase().includes(q) ||
+      device.condition?.toLowerCase().includes(q) ||
+      device.remarks?.toLowerCase().includes(q)
+    );
+  });
+
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
   // Assign modal state
   const [assignStep, setAssignStep] = useState(0);
   const [selectedAssignEmployee, setSelectedAssignEmployee] = useState(null);
@@ -380,6 +758,7 @@ const handleTempDeployDone = async () => {
   const [docxBlob, setDocxBlob] = useState(null);
 
   // --- STATE for New Acquisitions Modal ---
+<<<<<<< HEAD
 const [showNewAcqModal, setShowNewAcqModal] = useState(false);
 const [newAcqForm, setNewAcqForm] = useState({
   deviceType: "",
@@ -398,6 +777,21 @@ const [assignSerialManually, setAssignSerialManually] = useState(false);
 const [manualQuantity, setManualQuantity] = useState(1);
 const [showManualSerialPanel, setShowManualSerialPanel] = useState(false);
 const [manualSerials, setManualSerials] = useState([]);
+=======
+  const [showNewAcqModal, setShowNewAcqModal] = useState(false);
+  const [newAcqForm, setNewAcqForm] = useState({
+    deviceType: "",
+    brand: "",
+    model: "",
+    condition: "",
+    remarks: "",
+    acquisitionDate: "",
+    startTag: "",
+    endTag: "",
+  });
+  const [newAcqError, setNewAcqError] = useState("");
+  const [newAcqLoading, setNewAcqLoading] = useState(false);
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
 
   // --- HANDLERS ---
   const getStatus = (assignedTo) => (assignedTo ? "In Use" : "Stock Room");
@@ -612,7 +1006,13 @@ const [manualSerials, setManualSerials] = useState([]);
           // Convert Excel serial date to mm/dd/yyyy if needed
           let acquisitionDate = row["Acquisition Date"] || "";
           if (typeof acquisitionDate === "number") {
+<<<<<<< HEAD
             const jsDate = new Date(Math.round((acquisitionDate - 25569) * 86400 * 1000));
+=======
+            const jsDate = new Date(
+              Math.round((acquisitionDate - 25569) * 86400 * 1000)
+            );
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             acquisitionDate =
               (jsDate.getMonth() + 1).toString().padStart(2, "0") +
               "/" +
@@ -633,7 +1033,13 @@ const [manualSerials, setManualSerials] = useState([]);
           }
           // Check for duplicate deviceTag
           const existing = allDevices.find(
+<<<<<<< HEAD
             (d) => d.deviceTag && d.deviceTag.toLowerCase() === row["Device Tag"].toLowerCase()
+=======
+            (d) =>
+              d.deviceTag &&
+              d.deviceTag.toLowerCase() === row["Device Tag"].toLowerCase()
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
           );
           const devicePayload = {
             deviceType: row["Device Type"],
@@ -670,6 +1076,7 @@ const [manualSerials, setManualSerials] = useState([]);
   };
 
   // --- FILTERED DEVICES ---
+<<<<<<< HEAD
 const filteredDevices = devices.filter(device => {
   const q = deviceSearch.toLowerCase();
   return (
@@ -681,6 +1088,19 @@ const filteredDevices = devices.filter(device => {
     device.remarks?.toLowerCase().includes(q)
   );
 });
+=======
+  const filteredDevices = devices.filter((device) => {
+    const q = deviceSearch.toLowerCase();
+    return (
+      device.deviceType?.toLowerCase().includes(q) ||
+      device.deviceTag?.toLowerCase().includes(q) ||
+      device.brand?.toLowerCase().includes(q) ||
+      device.model?.toLowerCase().includes(q) ||
+      device.condition?.toLowerCase().includes(q) ||
+      device.remarks?.toLowerCase().includes(q)
+    );
+  });
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
 
   const handleSelectAll = (e) => {
     const checked = e.target.checked;
@@ -688,7 +1108,13 @@ const filteredDevices = devices.filter(device => {
     if (checked) {
       setSelectedIds(filteredDevices.map((d) => d.id));
     } else {
+<<<<<<< HEAD
       setSelectedIds(selectedIds.filter(id => !filteredDevices.some(d => d.id === id)));
+=======
+      setSelectedIds(
+        selectedIds.filter((id) => !filteredDevices.some((d) => d.id === id))
+      );
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
     }
   };
 
@@ -780,34 +1206,67 @@ const filteredDevices = devices.filter(device => {
       setAssignModalProgress(30);
       const zip = new PizZip(content);
       setAssignModalProgress(40);
+<<<<<<< HEAD
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+=======
+      const doc = new Docxtemplater(zip, {
+        paragraphLoop: true,
+        linebreaks: true,
+      });
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
       setAssignModalProgress(50);
 
       const emp = employees.find((e) => e.id === selectedAssignEmployee.id);
       // Get all selected devices for assignment
+<<<<<<< HEAD
       const selectedDeviceObjects = devices.filter(d => selectedIds.includes(d.id));
+=======
+      const selectedDeviceObjects = devices.filter((d) =>
+        selectedIds.includes(d.id)
+      );
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
       // Philippine date logic
       const now = new Date();
       const utc = now.getTime() + now.getTimezoneOffset() * 60000;
       const phTime = new Date(utc + 8 * 60 * 60000); // GMT+8
+<<<<<<< HEAD
       const assignmentDate = phTime.getFullYear() + '-' +
         String(phTime.getMonth() + 1).padStart(2, '0') + '-' +
         String(phTime.getDate()).padStart(2, '0');
+=======
+      const assignmentDate =
+        phTime.getFullYear() +
+        "-" +
+        String(phTime.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(phTime.getDate()).padStart(2, "0");
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
 
       doc.setData({
         name: emp?.fullName || "",
         dateHired: emp?.dateHired || "",
         department: emp?.department || emp?.client || "",
         position: emp?.position || "",
+<<<<<<< HEAD
         devices: selectedDeviceObjects.map(dev => {
+=======
+        devices: selectedDeviceObjects.map((dev) => {
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
           // Format assignmentDate as 'June 06, 2025'
           let dateToFormat = dev.assignmentDate || assignmentDate;
           let formattedDate = "";
           if (dateToFormat) {
             const dateObj = new Date(dateToFormat);
             if (!isNaN(dateObj)) {
+<<<<<<< HEAD
               formattedDate = dateObj.toLocaleString('en-US', {
                 year: 'numeric', month: 'long', day: '2-digit'
+=======
+              formattedDate = dateObj.toLocaleString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "2-digit",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
               });
             } else {
               formattedDate = dateToFormat;
@@ -819,7 +1278,13 @@ const filteredDevices = devices.filter(device => {
             brand: dev.brand,
             deviceTag: dev.deviceTag,
             condition: dev.condition,
+<<<<<<< HEAD
             remarks: assignModalChecks.temporaryDeploy ? "temporary deployed" : dev.remarks,
+=======
+            remarks: assignModalChecks.temporaryDeploy
+              ? "temporary deployed"
+              : dev.remarks,
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
           };
         }),
         // Dual placeholders for colored checkboxes
@@ -847,6 +1312,7 @@ const filteredDevices = devices.filter(device => {
   };
 
   // Download and assign devices when user clicks Download DOCX
+<<<<<<< HEAD
 const handleDownloadAndAssign = async () => {
   if (!assignModalDocxBlob) return;
   const emp = employees.find((e) => e.id === selectedAssignEmployee.id);
@@ -879,10 +1345,52 @@ const handleDownloadAndAssign = async () => {
   closeAssignModal();
   loadDevicesAndEmployees();
 };
+=======
+  const handleDownloadAndAssign = async () => {
+    if (!assignModalDocxBlob) return;
+    const emp = employees.find((e) => e.id === selectedAssignEmployee.id);
+    const employeeName = emp?.fullName
+      ? emp.fullName.replace(/[^a-zA-Z0-9\s-]/g, "").replace(/\s+/g, "_")
+      : "Employee";
+    const fileName = `${employeeName} - NEW ISSUE.docx`;
+    saveAs(assignModalDocxBlob, fileName);
+    // Move assigned devices to assets (update their assignedTo, assignmentDate, status, remarks)
+    const now = new Date();
+    const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+    const phTime = new Date(utc + 8 * 60 * 60000); // GMT+8
+    const assignmentDate =
+      phTime.getFullYear() +
+      "-" +
+      String(phTime.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(phTime.getDate()).padStart(2, "0");
+    for (const dev of devices.filter((d) => selectedIds.includes(d.id))) {
+      await updateDevice(dev.id, {
+        ...dev,
+        assignedTo: selectedAssignEmployee.id,
+        assignmentDate,
+        status: "In Use",
+        remarks: assignModalChecks.temporaryDeploy
+          ? "temporary deployed"
+          : dev.remarks,
+      });
+      await logDeviceHistory({
+        employeeId: selectedAssignEmployee.id,
+        deviceId: dev.id,
+        deviceTag: dev.deviceTag,
+        action: "assigned",
+        date: new Date().toISOString(),
+      });
+    }
+    closeAssignModal();
+    loadDevicesAndEmployees();
+  };
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
 
   // --- END ASSIGN MODAL LOGIC ---
 
   // Handler for bulk assign
+<<<<<<< HEAD
 const handleBulkAssign = () => {
   if (selectedIds.length === 0) return;
   // For now, open assign modal for the first selected device
@@ -957,12 +1465,106 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
   await loadDevicesAndEmployees();
   alert(`Added/updated ${added} device(s).`);
 };
+=======
+  const handleBulkAssign = () => {
+    if (selectedIds.length === 0) return;
+    // For now, open assign modal for the first selected device
+    const device = devices.find((d) => d.id === selectedIds[0]);
+    if (device) {
+      openAssignModal(device);
+    }
+    // If you want to support multi-assign, you can extend this logic
+  };
+
+  // --- New Acquisitions Functionality ---
+  const handleNewAcquisitions = async () => {
+    // Prompt for device type, brand, model, condition, remarks, acquisition date, start tag, end tag
+    // (In your UI, these are already collected by the modal, so here we just handle the logic)
+    // Find the modal fields by their DOM selectors if needed, or use a ref-based approach if you want to trigger from a button
+    // But since your modal is already present, just implement the logic for adding devices in bulk
+    // This function is to be called by the New Acquisitions button
+    // This is a placeholder for the actual modal logic, which should call this function with the correct data
+    // For now, you can call this function from your modal's submit handler
+  };
+
+  // Attach to the button:
+  // <button style={styles.button} onClick={handleNewAcquisitions}>New Acquisitions</button>
+  // In your modal, call handleNewAcquisitions with the correct data
+
+  // The actual logic for adding devices in bulk:
+  const addDevicesInBulk = async ({
+    deviceType,
+    brand,
+    model,
+    condition,
+    remarks,
+    acquisitionDate,
+    startTag,
+    endTag,
+  }) => {
+    if (!deviceType || !brand || !condition || !startTag || !endTag) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+    const typeObj = deviceTypes.find((t) => t.label === deviceType);
+    if (!typeObj) {
+      alert("Invalid device type.");
+      return;
+    }
+    const prefix = `JOII${typeObj.code}`;
+    const start = parseInt(startTag, 10);
+    const end = parseInt(endTag, 10);
+    if (
+      isNaN(start) ||
+      isNaN(end) ||
+      start > end ||
+      start < 0 ||
+      end < 0 ||
+      end - start + 1 > 100
+    ) {
+      alert(
+        "Invalid tag range (max 100 at a time, start <= end, numbers only)."
+      );
+      return;
+    }
+    const allDevices = await getAllDevices();
+    let added = 0;
+    for (let i = start; i <= end; i++) {
+      const tagNum = String(i).padStart(4, "0");
+      const deviceTag = `${prefix}${tagNum}`;
+      const existing = allDevices.find((d) => d.deviceTag === deviceTag);
+      const payload = {
+        deviceType,
+        deviceTag,
+        brand,
+        model,
+        condition,
+        remarks,
+        status: "Stock Room",
+        assignedTo: "",
+        assignmentDate: "",
+        acquisitionDate,
+      };
+      try {
+        if (existing) {
+          await updateDevice(existing.id, payload);
+        } else {
+          await addDevice(payload);
+        }
+        added++;
+      } catch {}
+    }
+    await loadDevicesAndEmployees();
+    alert(`Added/updated ${added} device(s).`);
+  };
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
 
   const handleNewAcqInput = ({ target: { name, value } }) => {
     setNewAcqForm((prev) => ({ ...prev, [name]: value }));
     setNewAcqError("");
   };
 
+<<<<<<< HEAD
   const handleManualSerialToggle = (e) => {
     const checked = e.target.checked;
     setAssignSerialManually(checked);
@@ -1094,16 +1696,32 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
     }
 
     // Regular bulk add workflow
+=======
+  const handleNewAcqSubmit = async () => {
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
     setNewAcqError("");
     setNewAcqLoading(true);
     try {
       await addDevicesInBulk(newAcqForm);
       setShowNewAcqModal(false);
+<<<<<<< HEAD
       setNewAcqForm({ deviceType: "", brand: "", model: "", condition: "", remarks: "", acquisitionDate: "", startTag: "", endTag: "", supplier: "" });
       setAssignSerialManually(false);
       setShowManualSerialPanel(false);
       setManualSerials([]);
       setManualQuantity(1);
+=======
+      setNewAcqForm({
+        deviceType: "",
+        brand: "",
+        model: "",
+        condition: "",
+        remarks: "",
+        acquisitionDate: "",
+        startTag: "",
+        endTag: "",
+      });
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
     } catch (err) {
       setNewAcqError("Failed to add devices. Please try again.");
     }
@@ -1133,7 +1751,11 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
             type="text"
             placeholder="Search devices..."
             value={deviceSearch}
+<<<<<<< HEAD
             onChange={e => setDeviceSearch(e.target.value)}
+=======
+            onChange={(e) => setDeviceSearch(e.target.value)}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             style={styles.googleSearchInput}
           />
         </div>
@@ -1168,23 +1790,49 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
           </button>
         </label>
         <button
+<<<<<<< HEAD
           style={{ ...styles.button, background: selectedIds.length ? styles.button.background : styles.buttonDisabled.background, color: selectedIds.length ? styles.button.color : styles.buttonDisabled.color }}
+=======
+          style={{
+            ...styles.button,
+            background: selectedIds.length
+              ? styles.button.background
+              : styles.buttonDisabled.background,
+            color: selectedIds.length
+              ? styles.button.color
+              : styles.buttonDisabled.color,
+          }}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
           disabled={selectedIds.length === 0}
           onClick={() => handleBulkAssign()}
         >
           Assign
         </button>
         <button
+<<<<<<< HEAD
           style={{ ...styles.button, background: selectedIds.length ? '#e57373' : styles.buttonDisabled.background, color: selectedIds.length ? '#fff' : styles.buttonDisabled.color }}
+=======
+          style={{
+            ...styles.button,
+            background: selectedIds.length
+              ? "#e57373"
+              : styles.buttonDisabled.background,
+            color: selectedIds.length ? "#fff" : styles.buttonDisabled.color,
+          }}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
           disabled={selectedIds.length === 0 || deleteProgress.total > 0}
           onClick={handleBulkDelete}
         >
           Delete
         </button>
+<<<<<<< HEAD
         <button
           style={styles.button}
           onClick={() => setShowNewAcqModal(true)}
         >
+=======
+        <button style={styles.button} onClick={() => setShowNewAcqModal(true)}>
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
           New Acquisitions
         </button>
         {deleteProgress.total > 0 && (
@@ -1247,6 +1895,7 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
                 <th style={styles.th}>{fieldLabels.condition}</th>
                 <th style={styles.th}>{fieldLabels.remarks}</th>
                 <th style={styles.th}>{fieldLabels.acquisitionDate}</th>
+<<<<<<< HEAD
                 <th style={{
                   ...styles.th,
                   textAlign: "center",
@@ -1351,6 +2000,203 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
                     </td>
                   </tr>
                 ))}
+=======
+                <th
+                  style={{
+                    ...styles.th,
+                    textAlign: "center",
+                  }}
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredDevices.map((device) => (
+                <tr key={device.id}>
+                  <td
+                    style={{
+                      ...styles.td,
+                      width: 32,
+                      minWidth: 32,
+                      maxWidth: 32,
+                      textAlign: "center",
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedIds.includes(device.id)}
+                      onChange={() => handleSelectOne(device.id)}
+                      style={{ width: 16, height: 16, margin: 0 }}
+                    />
+                  </td>
+                  <td style={styles.td}>{device.deviceType}</td>
+                  <td style={styles.td}>{device.deviceTag}</td>
+                  <td style={styles.td}>{device.brand}</td>
+                  <td style={styles.td}>{device.model}</td>
+                  <td style={styles.td}>
+                    {getEmployeeName(device.assignedTo)}
+                  </td>
+                  <td style={styles.td}>
+                    {device.assignmentDate
+                      ? (() => {
+                          const dateObj = new Date(device.assignmentDate);
+                          if (isNaN(dateObj)) return device.assignmentDate;
+                          return dateObj.toLocaleString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          });
+                        })()
+                      : ""}
+                  </td>
+                  <td style={styles.td}>
+                    {device.assignedTo ? "In Use" : "Stock Room"}
+                  </td>
+                  <td style={styles.td}>{device.condition}</td>
+                  <td style={styles.td}>{device.remarks}</td>
+                  <td style={styles.td}>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: 24,
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <button
+                        style={{
+                          width: 48,
+                          height: 48,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          border: "none",
+                          outline: "none",
+                          borderRadius: 12,
+                          background: "#eaf7fa",
+                          cursor: "pointer",
+                          transition: "background 0.18s",
+                        }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.background = "#d0f0f7")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.background = "#eaf7fa")
+                        }
+                        onClick={() => handleEdit(device)}
+                        title="Edit"
+                      >
+                        <svg
+                          width="18"
+                          height="18"
+                          fill="none"
+                          stroke="#2563eb"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 20h9" />
+                          <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+                        </svg>
+                      </button>
+                      <button
+                        style={{
+                          width: 48,
+                          height: 48,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          border: "none",
+                          outline: "none",
+                          borderRadius: 12,
+                          background: "#ffe9ec",
+                          cursor: "pointer",
+                          transition: "background 0.18s",
+                        }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.background = "#ffd6de")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.background = "#ffe9ec")
+                        }
+                        onClick={() => handleDelete(device.id)}
+                        title="Delete"
+                      >
+                        <svg
+                          width="18"
+                          height="18"
+                          fill="none"
+                          stroke="#e57373"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <polyline points="3 6 5 6 21 6" />
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+                          <line x1="10" y1="11" x2="10" y2="17" />
+                          <line x1="14" y1="11" x2="14" y2="17" />
+                        </svg>
+                      </button>
+                      {device.assignedTo && (
+                        <button
+                          style={styles.iconButton}
+                          title="Unassign"
+                          onClick={async () => {
+                            try {
+                              const { id, ...deviceWithoutId } = device;
+                              await updateDevice(device.id, {
+                                ...deviceWithoutId,
+                                assignedTo: "",
+                                assignmentDate: "",
+                                status: getStatus(""),
+                              });
+                              await logDeviceHistory({
+                                employeeId: device.assignedTo,
+                                deviceId: device.id,
+                                deviceTag: device.deviceTag,
+                                action: "unassigned",
+                                reason: "Unassigned from Inventory",
+                                condition: device.condition,
+                                date: new Date().toISOString(),
+                              });
+                              loadDevicesAndEmployees();
+                            } catch (err) {
+                              alert(
+                                "Failed to unassign device. Please try again."
+                              );
+                            }
+                          }}
+                          onMouseEnter={(e) =>
+                            (e.currentTarget.style.background =
+                              styles.iconButtonHover.background)
+                          }
+                          onMouseLeave={(e) =>
+                            (e.currentTarget.style.background =
+                              styles.iconButton.background)
+                          }
+                        >
+                          <svg
+                            width="18"
+                            height="18"
+                            fill="none"
+                            stroke="#3b82f6"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M15 19l-7-7 7-7" />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
             </tbody>
           </table>
         </div>
@@ -1362,7 +2208,13 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
           <div style={styles.modalContent}>
             {assignModalStep === 1 && (
               <>
+<<<<<<< HEAD
                 <h4 style={styles.modalTitle}>Assign Device: {assigningDevice.deviceTag}</h4>
+=======
+                <h4 style={styles.modalTitle}>
+                  Assign Device: {assigningDevice.deviceTag}
+                </h4>
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                 <input
                   type="text"
                   placeholder="Search employee..."
@@ -1388,7 +2240,15 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
                     .map((emp) => (
                       <li
                         key={emp.id}
+<<<<<<< HEAD
                         style={{ listStyle: "none", marginBottom: 8, width: "100%" }}
+=======
+                        style={{
+                          listStyle: "none",
+                          marginBottom: 8,
+                          width: "100%",
+                        }}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                       >
                         <button
                           style={{
@@ -1422,7 +2282,14 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
             {assignModalStep === 2 && selectedAssignEmployee && (
               <>
                 <h4 style={styles.modalTitle}>
+<<<<<<< HEAD
                   Asset Accountability Form Options for: <span style={{ color: "#2563eb" }}>{selectedAssignEmployee.fullName}</span>
+=======
+                  Asset Accountability Form Options for:{" "}
+                  <span style={{ color: "#2563eb" }}>
+                    {selectedAssignEmployee.fullName}
+                  </span>
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                 </h4>
                 <div style={styles.modalSection}>
                   <div style={styles.modalLabel}>New Issue:</div>
@@ -1434,7 +2301,12 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
                         checked={assignModalChecks.newIssueNew}
                         onChange={handleAssignModalCheckbox}
                         style={styles.modalCheckbox}
+<<<<<<< HEAD
                       /> Newly Purchased
+=======
+                      />{" "}
+                      Newly Purchased
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                     </label>
                     <label style={{ display: "flex", alignItems: "center" }}>
                       <input
@@ -1443,7 +2315,12 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
                         checked={assignModalChecks.newIssueStock}
                         onChange={handleAssignModalCheckbox}
                         style={styles.modalCheckbox}
+<<<<<<< HEAD
                       /> Stock
+=======
+                      />{" "}
+                      Stock
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                     </label>
                   </div>
                   <div style={styles.modalLabel}>Work From Home/Borrowed:</div>
@@ -1455,7 +2332,12 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
                         checked={assignModalChecks.wfhNew}
                         onChange={handleAssignModalCheckbox}
                         style={styles.modalCheckbox}
+<<<<<<< HEAD
                       /> Newly Purchased
+=======
+                      />{" "}
+                      Newly Purchased
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                     </label>
                     <label style={{ display: "flex", alignItems: "center" }}>
                       <input
@@ -1464,18 +2346,39 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
                         checked={assignModalChecks.wfhStock}
                         onChange={handleAssignModalCheckbox}
                         style={styles.modalCheckbox}
+<<<<<<< HEAD
                       /> Stock
                     </label>
                   </div>
                   <div style={{ marginTop: 14 }}>
                     <label style={{ display: "flex", alignItems: "center", fontWeight: 600, color: "#e57373" }}>
+=======
+                      />{" "}
+                      Stock
+                    </label>
+                  </div>
+                  <div style={{ marginTop: 14 }}>
+                    <label
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        fontWeight: 600,
+                        color: "#e57373",
+                      }}
+                    >
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                       <input
                         type="checkbox"
                         name="temporaryDeploy"
                         checked={assignModalChecks.temporaryDeploy}
                         onChange={handleAssignModalCheckbox}
                         style={styles.modalCheckbox}
+<<<<<<< HEAD
                       /> Temporary Deploy
+=======
+                      />{" "}
+                      Temporary Deploy
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                     </label>
                   </div>
                 </div>
@@ -1512,13 +2415,27 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
                             />
                           </div>
                           <span style={{ color: "#2563eb", fontWeight: 500 }}>
+<<<<<<< HEAD
                             Generating: {assignModalProgress < 100 ? `${assignModalProgress}%` : "Done"}
+=======
+                            Generating:{" "}
+                            {assignModalProgress < 100
+                              ? `${assignModalProgress}%`
+                              : "Done"}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                           </span>
                         </div>
                       )}
                       {!assignModalGenerating && !assignModalDocxBlob && (
                         <button
+<<<<<<< HEAD
                           style={{ ...styles.modalButton, background: "#22c55e" }}
+=======
+                          style={{
+                            ...styles.modalButton,
+                            background: "#22c55e",
+                          }}
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                           onClick={handleAssignModalGenerateDocx}
                         >
                           Generate Asset Accountability Form
@@ -1551,6 +2468,7 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
       {showNewAcqModal && (
         <div style={styles.modalOverlay}>
           <div style={styles.inventoryModalContent}>
+<<<<<<< HEAD
             {!showManualSerialPanel ? (
               <>
                 <h3 style={styles.inventoryModalTitle}>New Acquisitions (Bulk Add)</h3>
@@ -1880,6 +2798,203 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
                 </div>
               </>
             )}
+=======
+            <h3 style={styles.inventoryModalTitle}>
+              New Acquisitions (Bulk Add)
+            </h3>
+            <div
+              style={{
+                display: "flex",
+                gap: 16,
+                width: "100%",
+                marginBottom: 12,
+              }}
+            >
+              <div
+                style={{
+                  ...styles.inventoryInputGroup,
+                  flex: 1,
+                  marginBottom: 0,
+                }}
+              >
+                <label style={styles.inventoryLabel}>Device Type:</label>
+                <select
+                  name="deviceType"
+                  value={newAcqForm.deviceType}
+                  onChange={handleNewAcqInput}
+                  style={styles.inventoryInput}
+                >
+                  <option value="">Select Device Type</option>
+                  {deviceTypes.map((type) => (
+                    <option key={type.label} value={type.label}>
+                      {type.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div
+                style={{
+                  ...styles.inventoryInputGroup,
+                  flex: 1,
+                  marginBottom: 0,
+                }}
+              >
+                <label style={styles.inventoryLabel}>Brand:</label>
+                <input
+                  name="brand"
+                  value={newAcqForm.brand}
+                  onChange={handleNewAcqInput}
+                  style={styles.inventoryInput}
+                  autoComplete="off"
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                gap: 16,
+                width: "100%",
+                marginBottom: 12,
+              }}
+            >
+              <div
+                style={{
+                  ...styles.inventoryInputGroup,
+                  flex: 1,
+                  marginBottom: 0,
+                }}
+              >
+                <label style={styles.inventoryLabel}>Model:</label>
+                <input
+                  name="model"
+                  value={newAcqForm.model}
+                  onChange={handleNewAcqInput}
+                  style={styles.inventoryInput}
+                />
+              </div>
+
+              <div
+                style={{
+                  ...styles.inventoryInputGroup,
+                  flex: 1,
+                  marginBottom: 0,
+                }}
+              >
+                <label style={styles.inventoryLabel}>Condition:</label>
+                <select
+                  name="condition"
+                  value={newAcqForm.condition}
+                  onChange={handleNewAcqInput}
+                  style={styles.inventoryInput}
+                >
+                  <option value="">Select Condition</option>
+                  {conditions.map((cond) => (
+                    <option key={cond} value={cond}>
+                      {cond}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div style={{ ...styles.inventoryInputGroup, marginBottom: 10 }}>
+              <label style={styles.inventoryLabel}>Remarks:</label>
+              <input
+                name="remarks"
+                value={newAcqForm.remarks}
+                onChange={handleNewAcqInput}
+                style={styles.inventoryInput}
+              />
+            </div>
+            <div style={{ ...styles.inventoryInputGroup, marginBottom: 10 }}>
+              <label style={styles.inventoryLabel}>Acquisition Date:</label>
+              <input
+                name="acquisitionDate"
+                type="date"
+                value={newAcqForm.acquisitionDate || ""}
+                onChange={handleNewAcqInput}
+                style={styles.inventoryInput}
+              />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                gap: 16,
+                width: "100%",
+                marginBottom: 12,
+              }}
+            >
+              <div
+                style={{
+                  ...styles.inventoryInputGroup,
+                  flex: 1,
+                  marginBottom: 0,
+                }}
+              >
+                <label style={styles.inventoryLabel}>
+                  Start Tag (e.g. 0009):
+                </label>
+                <input
+                  name="startTag"
+                  value={newAcqForm.startTag}
+                  onChange={handleNewAcqInput}
+                  style={styles.inventoryInput}
+                  maxLength={4}
+                  placeholder="0001"
+                />
+              </div>
+              <div
+                style={{
+                  ...styles.inventoryInputGroup,
+                  flex: 1,
+                  marginBottom: 0,
+                }}
+              >
+                <label style={styles.inventoryLabel}>
+                  End Tag (e.g. 0015):
+                </label>
+                <input
+                  name="endTag"
+                  value={newAcqForm.endTag}
+                  onChange={handleNewAcqInput}
+                  style={styles.inventoryInput}
+                  maxLength={4}
+                  placeholder="0015"
+                />
+              </div>
+            </div>
+            {newAcqError && (
+              <span style={{ color: "#e57373", fontSize: 13, marginBottom: 8 }}>
+                {newAcqError}
+              </span>
+            )}
+            <div
+              style={{
+                marginTop: 16,
+                display: "flex",
+                justifyContent: "center",
+                gap: 10,
+                width: "100%",
+              }}
+            >
+              <button
+                onClick={handleNewAcqSubmit}
+                disabled={newAcqLoading}
+                style={{
+                  ...styles.inventoryModalButton,
+                  opacity: newAcqLoading ? 0.6 : 1,
+                }}
+              >
+                {newAcqLoading ? "Adding..." : "Add Devices"}
+              </button>
+              <button
+                onClick={() => setShowNewAcqModal(false)}
+                style={styles.inventoryModalButtonSecondary}
+                disabled={newAcqLoading}
+              >
+                Cancel
+              </button>
+            </div>
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
           </div>
         </div>
       )}
@@ -1895,7 +3010,11 @@ const styles = {
     maxWidth: "100%",
     background: "#f7f9fb",
     minHeight: "100vh",
+<<<<<<< HEAD
     fontFamily: 'Segoe UI, Arial, sans-serif',
+=======
+    fontFamily: "Segoe UI, Arial, sans-serif",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
   },
   headerBar: {
     display: "flex",
@@ -1923,8 +3042,13 @@ const styles = {
     fontWeight: 800,
     fontSize: 28,
     marginBottom: 18,
+<<<<<<< HEAD
     letterSpacing: 0,
     fontFamily: 'Segoe UI, Arial, sans-serif',
+=======
+    letterSpacing: 1,
+    fontFamily: "Segoe UI, Arial, sans-serif",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
   },
   googleSearchBar: {
     display: "flex",
@@ -1988,7 +3112,11 @@ const styles = {
     borderRadius: 16,
     boxShadow: "0 2px 12px rgba(68,95,109,0.10)",
     overflow: "hidden",
+<<<<<<< HEAD
     tableLayout: 'auto',
+=======
+    tableLayout: "auto",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
   },
   th: {
     padding: "16px 12px",
@@ -1999,7 +3127,11 @@ const styles = {
     borderBottom: "2px solid #e0e7ef",
     textAlign: "left",
     letterSpacing: 0.2,
+<<<<<<< HEAD
     whiteSpace: 'nowrap',
+=======
+    whiteSpace: "nowrap",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
   },
   td: {
     padding: "14px 12px",
@@ -2008,7 +3140,11 @@ const styles = {
     borderBottom: "1px solid #e0e7ef",
     background: "#f7f9fb",
     verticalAlign: "middle",
+<<<<<<< HEAD
     wordBreak: 'break-word',
+=======
+    wordBreak: "break-word",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
   },
   iconButton: {
     background: "none",
@@ -2111,6 +3247,7 @@ const styles = {
     fontSize: 13,
   },
   inventoryInput: {
+<<<<<<< HEAD
     width: '100%',
     minWidth: 0,
     fontSize: 13,
@@ -2120,6 +3257,17 @@ const styles = {
     background: '#f1f5f9',
     height: '30px',
     boxSizing: 'border-box',
+=======
+    width: "100%",
+    minWidth: 0,
+    fontSize: 13,
+    padding: "6px 8px",
+    borderRadius: 5,
+    border: "1.2px solid #cbd5e1",
+    background: "#f1f5f9",
+    height: "32px",
+    boxSizing: "border-box",
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
     marginBottom: 0,
   },
   inventoryModalButton: {
@@ -2218,4 +3366,8 @@ const styles = {
   actionDeleteButtonHover: {
     background: "#ffd6de",
   },
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
