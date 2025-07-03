@@ -853,14 +853,28 @@ function Inventory() {
     e.target.value = "";
   };
 
-  // Update handleSelectAll to only select filtered devices
+  // --- FILTERED DEVICES ---
+  const filteredDevices = devices.filter((device) => {
+    const q = deviceSearch.toLowerCase();
+    return (
+      device.deviceType?.toLowerCase().includes(q) ||
+      device.deviceTag?.toLowerCase().includes(q) ||
+      device.brand?.toLowerCase().includes(q) ||
+      device.model?.toLowerCase().includes(q) ||
+      device.condition?.toLowerCase().includes(q) ||
+      device.remarks?.toLowerCase().includes(q)
+    );
+  });
+
   const handleSelectAll = (e) => {
     const checked = e.target.checked;
     setSelectAll(checked);
     if (checked) {
       setSelectedIds(filteredDevices.map((d) => d.id));
     } else {
-      setSelectedIds([]);
+      setSelectedIds(
+        selectedIds.filter((id) => !filteredDevices.some((d) => d.id === id))
+      );
     }
   };
 
@@ -906,17 +920,6 @@ function Inventory() {
     setAssigningDevice(device);
     setAssignModalOpen(true);
     setAssignModalStep(1);
-    setSelectedAssignEmployee(null);
-    setAssignModalChecks({
-      newIssueNew: false,
-      newIssueStock: false,
-      wfhNew: false,
-      wfhStock: false,
-      temporaryDeploy: false,
-    });
-    setAssignModalShowGenerate(false);
-    setProgress(0);
-    setGenerating(false);
     setDocxBlob(null);
     setAssignSearch("");
   };
@@ -1095,6 +1098,115 @@ function Inventory() {
     // If you want to support multi-assign, you can extend this logic
   };
 
+  // --- New Acquisitions Functionality ---
+  const handleNewAcquisitions = async () => {
+    // Prompt for device type, brand, model, condition, remarks, acquisition date, start tag, end tag
+    // (In your UI, these are already collected by the modal, so here we just handle the logic)
+    // Find the modal fields by their DOM selectors if needed, or use a ref-based approach if you want to trigger from a button
+    // But since your modal is already present, just implement the logic for adding devices in bulk
+    // This function is to be called by the New Acquisitions button
+    // This is a placeholder for the actual modal logic, which should call this function with the correct data
+    // For now, you can call this function from your modal's submit handler
+  };
+
+  // Attach to the button:
+  // <button style={styles.button} onClick={handleNewAcquisitions}>New Acquisitions</button>
+  // In your modal, call handleNewAcquisitions with the correct data
+
+  // The actual logic for adding devices in bulk:
+  const addDevicesInBulk = async ({
+    deviceType,
+    brand,
+    model,
+    condition,
+    remarks,
+    acquisitionDate,
+    startTag,
+    endTag,
+  }) => {
+    if (!deviceType || !brand || !condition || !startTag || !endTag) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+    const typeObj = deviceTypes.find((t) => t.label === deviceType);
+    if (!typeObj) {
+      alert("Invalid device type.");
+      return;
+    }
+    const prefix = `JOII${typeObj.code}`;
+    const start = parseInt(startTag, 10);
+    const end = parseInt(endTag, 10);
+    if (
+      isNaN(start) ||
+      isNaN(end) ||
+      start > end ||
+      start < 0 ||
+      end < 0 ||
+      end - start + 1 > 100
+    ) {
+      alert(
+        "Invalid tag range (max 100 at a time, start <= end, numbers only)."
+      );
+      return;
+    }
+    const allDevices = await getAllDevices();
+    let added = 0;
+    for (let i = start; i <= end; i++) {
+      const tagNum = String(i).padStart(4, "0");
+      const deviceTag = `${prefix}${tagNum}`;
+      const existing = allDevices.find((d) => d.deviceTag === deviceTag);
+      const payload = {
+        deviceType,
+        deviceTag,
+        brand,
+        model,
+        condition,
+        remarks,
+        status: "Stock Room",
+        assignedTo: "",
+        assignmentDate: "",
+        acquisitionDate,
+      };
+      try {
+        if (existing) {
+          await updateDevice(existing.id, payload);
+        } else {
+          await addDevice(payload);
+        }
+        added++;
+      } catch {}
+    }
+    await loadDevicesAndEmployees();
+    alert(`Added/updated ${added} device(s).`);
+  };
+
+  const handleNewAcqInput = ({ target: { name, value } }) => {
+    setNewAcqForm((prev) => ({ ...prev, [name]: value }));
+    setNewAcqError("");
+  };
+
+  const handleNewAcqSubmit = async () => {
+    setNewAcqError("");
+    setNewAcqLoading(true);
+    try {
+      await addDevicesInBulk(newAcqForm);
+      setShowNewAcqModal(false);
+      setNewAcqForm({
+        deviceType: "",
+        brand: "",
+        model: "",
+        condition: "",
+        remarks: "",
+        acquisitionDate: "",
+        startTag: "",
+        endTag: "",
+      });
+    } catch (err) {
+      setNewAcqError("Failed to add devices. Please try again.");
+    }
+    setNewAcqLoading(false);
+  };
+
   return (
     <div style={styles.pageContainer}>
       <div style={styles.headerBarGoogle}>
@@ -1228,8 +1340,8 @@ function Inventory() {
                   <input
                     type="checkbox"
                     checked={
-                      filteredDevices.length > 0 &&
-                      filteredDevices.every((d) => selectedIds.includes(d.id))
+                      devices.length > 0 &&
+                      selectedIds.length === devices.length
                     }
                     onChange={handleSelectAll}
                     style={{ width: 16, height: 16, margin: 0 }}
@@ -1254,203 +1366,190 @@ function Inventory() {
               </tr>
             </thead>
             <tbody>
-              {devices
-                .filter((device) => !device.assignedTo)
-                .filter((device) => {
-                  const q = deviceSearch.toLowerCase();
-                  return (
-                    device.deviceType?.toLowerCase().includes(q) ||
-                    device.deviceTag?.toLowerCase().includes(q) ||
-                    device.brand?.toLowerCase().includes(q) ||
-                    device.model?.toLowerCase().includes(q) ||
-                    device.condition?.toLowerCase().includes(q) ||
-                    device.remarks?.toLowerCase().includes(q)
-                  );
-                })
-                .map((device) => (
-                  <tr key={device.id}>
-                    <td
+              {filteredDevices.map((device) => (
+                <tr key={device.id}>
+                  <td
+                    style={{
+                      ...styles.td,
+                      width: 32,
+                      minWidth: 32,
+                      maxWidth: 32,
+                      textAlign: "center",
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedIds.includes(device.id)}
+                      onChange={() => handleSelectOne(device.id)}
+                      style={{ width: 16, height: 16, margin: 0 }}
+                    />
+                  </td>
+                  <td style={styles.td}>{device.deviceType}</td>
+                  <td style={styles.td}>{device.deviceTag}</td>
+                  <td style={styles.td}>{device.brand}</td>
+                  <td style={styles.td}>{device.model}</td>
+                  <td style={styles.td}>
+                    {getEmployeeName(device.assignedTo)}
+                  </td>
+                  <td style={styles.td}>
+                    {device.assignmentDate
+                      ? (() => {
+                          const dateObj = new Date(device.assignmentDate);
+                          if (isNaN(dateObj)) return device.assignmentDate;
+                          return dateObj.toLocaleString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          });
+                        })()
+                      : ""}
+                  </td>
+                  <td style={styles.td}>
+                    {device.assignedTo ? "In Use" : "Stock Room"}
+                  </td>
+                  <td style={styles.td}>{device.condition}</td>
+                  <td style={styles.td}>{device.remarks}</td>
+                  <td style={styles.td}>
+                    <div
                       style={{
-                        ...styles.td,
-                        width: 32,
-                        minWidth: 32,
-                        maxWidth: 32,
-                        textAlign: "center",
+                        display: "flex",
+                        gap: 24,
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
                     >
-                      <input
-                        type="checkbox"
-                        checked={selectedIds.includes(device.id)}
-                        onChange={() => handleSelectOne(device.id)}
-                        style={{ width: 16, height: 16, margin: 0 }}
-                      />
-                    </td>
-                    <td style={styles.td}>{device.deviceType}</td>
-                    <td style={styles.td}>{device.deviceTag}</td>
-                    <td style={styles.td}>{device.brand}</td>
-                    <td style={styles.td}>{device.model}</td>
-                    <td style={styles.td}>
-                      {getEmployeeName(device.assignedTo)}
-                    </td>
-                    <td style={styles.td}>
-                      {device.assignmentDate
-                        ? (() => {
-                            const dateObj = new Date(device.assignmentDate);
-                            if (isNaN(dateObj)) return device.assignmentDate;
-                            return dateObj.toLocaleString("en-US", {
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                            });
-                          })()
-                        : ""}
-                    </td>
-                    <td style={styles.td}>
-                      {device.assignedTo ? "In Use" : "Stock Room"}
-                    </td>
-                    <td style={styles.td}>{device.condition}</td>
-                    <td style={styles.td}>{device.remarks}</td>
-                    <td style={styles.td}>
-                      <div
+                      <button
                         style={{
+                          width: 48,
+                          height: 48,
                           display: "flex",
-                          gap: 24,
                           alignItems: "center",
                           justifyContent: "center",
+                          border: "none",
+                          outline: "none",
+                          borderRadius: 12,
+                          background: "#eaf7fa",
+                          cursor: "pointer",
+                          transition: "background 0.18s",
                         }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.background = "#d0f0f7")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.background = "#eaf7fa")
+                        }
+                        onClick={() => handleEdit(device)}
+                        title="Edit"
                       >
+                        <svg
+                          width="18"
+                          height="18"
+                          fill="none"
+                          stroke="#2563eb"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 20h9" />
+                          <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+                        </svg>
+                      </button>
+                      <button
+                        style={{
+                          width: 48,
+                          height: 48,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          border: "none",
+                          outline: "none",
+                          borderRadius: 12,
+                          background: "#ffe9ec",
+                          cursor: "pointer",
+                          transition: "background 0.18s",
+                        }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.background = "#ffd6de")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.background = "#ffe9ec")
+                        }
+                        onClick={() => handleDelete(device.id)}
+                        title="Delete"
+                      >
+                        <svg
+                          width="18"
+                          height="18"
+                          fill="none"
+                          stroke="#e57373"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <polyline points="3 6 5 6 21 6" />
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+                          <line x1="10" y1="11" x2="10" y2="17" />
+                          <line x1="14" y1="11" x2="14" y2="17" />
+                        </svg>
+                      </button>
+                      {device.assignedTo && (
                         <button
-                          style={{
-                            width: 48,
-                            height: 48,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            border: "none",
-                            outline: "none",
-                            borderRadius: 12,
-                            background: "#eaf7fa",
-                            cursor: "pointer",
-                            transition: "background 0.18s",
+                          style={styles.iconButton}
+                          title="Unassign"
+                          onClick={async () => {
+                            try {
+                              const { id, ...deviceWithoutId } = device;
+                              await updateDevice(device.id, {
+                                ...deviceWithoutId,
+                                assignedTo: "",
+                                assignmentDate: "",
+                                status: getStatus(""),
+                              });
+                              await logDeviceHistory({
+                                employeeId: device.assignedTo,
+                                deviceId: device.id,
+                                deviceTag: device.deviceTag,
+                                action: "unassigned",
+                                reason: "Unassigned from Inventory",
+                                condition: device.condition,
+                                date: new Date().toISOString(),
+                              });
+                              loadDevicesAndEmployees();
+                            } catch (err) {
+                              alert(
+                                "Failed to unassign device. Please try again."
+                              );
+                            }
                           }}
                           onMouseEnter={(e) =>
-                            (e.currentTarget.style.background = "#d0f0f7")
+                            (e.currentTarget.style.background =
+                              styles.iconButtonHover.background)
                           }
                           onMouseLeave={(e) =>
-                            (e.currentTarget.style.background = "#eaf7fa")
+                            (e.currentTarget.style.background =
+                              styles.iconButton.background)
                           }
-                          onClick={() => handleEdit(device)}
-                          title="Edit"
                         >
                           <svg
                             width="18"
                             height="18"
                             fill="none"
-                            stroke="#2563eb"
+                            stroke="#3b82f6"
                             strokeWidth="2"
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             viewBox="0 0 24 24"
                           >
-                            <path d="M12 20h9" />
-                            <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+                            <path d="M15 19l-7-7 7-7" />
                           </svg>
                         </button>
-                        <button
-                          style={{
-                            width: 48,
-                            height: 48,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            border: "none",
-                            outline: "none",
-                            borderRadius: 12,
-                            background: "#ffe9ec",
-                            cursor: "pointer",
-                            transition: "background 0.18s",
-                          }}
-                          onMouseEnter={(e) =>
-                            (e.currentTarget.style.background = "#ffd6de")
-                          }
-                          onMouseLeave={(e) =>
-                            (e.currentTarget.style.background = "#ffe9ec")
-                          }
-                          onClick={() => handleDelete(device.id)}
-                          title="Delete"
-                        >
-                          <svg
-                            width="18"
-                            height="18"
-                            fill="none"
-                            stroke="#e57373"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            viewBox="0 0 24 24"
-                          >
-                            <polyline points="3 6 5 6 21 6" />
-                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
-                            <line x1="10" y1="11" x2="10" y2="17" />
-                            <line x1="14" y1="11" x2="14" y2="17" />
-                          </svg>
-                        </button>
-                        {device.assignedTo && (
-                          <button
-                            style={styles.iconButton}
-                            title="Unassign"
-                            onClick={async () => {
-                              try {
-                                const { id, ...deviceWithoutId } = device;
-                                await updateDevice(device.id, {
-                                  ...deviceWithoutId,
-                                  assignedTo: "",
-                                  assignmentDate: "",
-                                  status: getStatus(""),
-                                });
-                                await logDeviceHistory({
-                                  employeeId: device.assignedTo,
-                                  deviceId: device.id,
-                                  deviceTag: device.deviceTag,
-                                  action: "unassigned",
-                                  reason: "Unassigned from Inventory",
-                                  condition: device.condition,
-                                  date: new Date().toISOString(),
-                                });
-                                loadDevicesAndEmployees();
-                              } catch (err) {
-                                alert(
-                                  "Failed to unassign device. Please try again."
-                                );
-                              }
-                            }}
-                            onMouseEnter={(e) =>
-                              (e.currentTarget.style.background =
-                                styles.iconButtonHover.background)
-                            }
-                            onMouseLeave={(e) =>
-                              (e.currentTarget.style.background =
-                                styles.iconButton.background)
-                            }
-                          >
-                            <svg
-                              width="18"
-                              height="18"
-                              fill="none"
-                              stroke="#3b82f6"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M15 19l-7-7 7-7" />
-                            </svg>
-                          </button>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -1775,7 +1874,7 @@ function Inventory() {
                 </select>
               </div>
             </div>
-            <div style={{ ...styles.inventoryInputGroup, marginBottom: 12 }}>
+            <div style={{ ...styles.inventoryInputGroup, marginBottom: 10 }}>
               <label style={styles.inventoryLabel}>Remarks:</label>
               <input
                 name="remarks"
@@ -1784,7 +1883,7 @@ function Inventory() {
                 style={styles.inventoryInput}
               />
             </div>
-            <div style={{ ...styles.inventoryInputGroup, marginBottom: 12 }}>
+            <div style={{ ...styles.inventoryInputGroup, marginBottom: 10 }}>
               <label style={styles.inventoryLabel}>Acquisition Date:</label>
               <input
                 name="acquisitionDate"
@@ -2056,11 +2155,11 @@ const styles = {
   },
   inventoryModalContent: {
     background: "#fff",
-    padding: 24,
+    padding: 20,
     borderRadius: 12,
-    minWidth: 700,
-    maxWidth: 780,
-    width: "85vw",
+    minWidth: 480,
+    maxWidth: 520,
+    width: "70vw",
     boxShadow: "0 6px 24px rgba(34,46,58,0.13)",
     display: "flex",
     flexDirection: "column",
@@ -2080,10 +2179,10 @@ const styles = {
     textAlign: "center",
   },
   inventoryModalTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 700,
     color: "#2563eb",
-    marginBottom: 18,
+    marginBottom: 14,
     letterSpacing: 0.5,
     textAlign: "center",
     width: "100%",
@@ -2092,16 +2191,16 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    marginBottom: 12,
+    marginBottom: 10,
     width: "100%",
-    minWidth: 180,
+    minWidth: 140,
   },
   inventoryLabel: {
     alignSelf: "flex-start",
     fontWeight: 500,
     color: "#222e3a",
-    marginBottom: 4,
-    fontSize: 14,
+    marginBottom: 3,
+    fontSize: 13,
   },
   inventoryInput: {
     width: "100%",
