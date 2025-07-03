@@ -14,19 +14,15 @@ import PizZip from "pizzip";
 import Docxtemplater from "docxtemplater";
 import { saveAs } from "file-saver";
 
-// ... your initialForm, fieldLabels, deviceTypes, statuses, conditions, DeviceFormModal ... (unchanged)
-
 const initialForm = {
   deviceType: "",
   deviceTag: "",
   brand: "",
   model: "",
-  quantity: 1,
   status: "",
   condition: "",
-  assignedTo: "",
-  assignmentDate: "",
   remarks: "",
+  acquisitionDate: "", // Added acquisitionDate
 };
 
 const fieldLabels = {
@@ -34,12 +30,10 @@ const fieldLabels = {
   deviceTag: "Device Tag",
   brand: "Brand",
   model: "Model",
-  quantity: "Quantity",
   status: "Status",
   condition: "Condition",
-  assignedTo: "Assigned To",
-  assignmentDate: "Assignment Date",
   remarks: "Remarks",
+  acquisitionDate: "Acquisition Date", // Added label
 };
 
 const deviceTypes = [
@@ -543,6 +537,19 @@ function Inventory() {
   // Add search state
   const [deviceSearch, setDeviceSearch] = useState("");
 
+  // --- FILTERED DEVICES (for table and select all logic) ---
+  const filteredDevices = devices.filter((device) => {
+    const q = deviceSearch.toLowerCase();
+    return (
+      device.deviceType?.toLowerCase().includes(q) ||
+      device.deviceTag?.toLowerCase().includes(q) ||
+      device.brand?.toLowerCase().includes(q) ||
+      device.model?.toLowerCase().includes(q) ||
+      device.condition?.toLowerCase().includes(q) ||
+      device.remarks?.toLowerCase().includes(q)
+    );
+  });
+
   // Assign modal state
   const [assignStep, setAssignStep] = useState(0);
   const [selectedAssignEmployee, setSelectedAssignEmployee] = useState(null);
@@ -556,6 +563,21 @@ function Inventory() {
   const [progress, setProgress] = useState(0);
   const [generating, setGenerating] = useState(false);
   const [docxBlob, setDocxBlob] = useState(null);
+
+  // --- STATE for New Acquisitions Modal ---
+  const [showNewAcqModal, setShowNewAcqModal] = useState(false);
+  const [newAcqForm, setNewAcqForm] = useState({
+    deviceType: "",
+    brand: "",
+    model: "",
+    condition: "",
+    remarks: "",
+    acquisitionDate: "",
+    startTag: "",
+    endTag: "",
+  });
+  const [newAcqError, setNewAcqError] = useState("");
+  const [newAcqLoading, setNewAcqLoading] = useState(false);
 
   // --- HANDLERS ---
   const getStatus = (assignedTo) => (assignedTo ? "In Use" : "Stock Room");
@@ -676,102 +698,23 @@ function Inventory() {
       return;
     }
     const tagPrefix = `JOII${typeObj.code}`;
-    let assignmentDate = form.assignmentDate;
-    if (form.assignedTo && !assignmentDate) {
-      assignmentDate = new Date().toISOString().slice(0, 10);
-    }
     const payload = {
       ...form,
-      status: getStatus(form.assignedTo),
+      status: "Stock Room",
       condition: form.condition || "New",
-      assignmentDate,
+      acquisitionDate: form.acquisitionDate || "",
     };
-    const quantity = parseInt(form.quantity, 10) || 1;
-    let newDeviceTags = [];
-    const { id, ...payloadWithoutId } = form;
     if (useSerial) {
-      if (!form._editDeviceId && quantity === 1) {
-        await addDevice(payloadWithoutId);
-        newDeviceTags = [payload.deviceTag];
-        if (payload.assignedTo) {
-          const allDevicesNow = await getAllDevices();
-          const newDevice = allDevicesNow.find(
-            (d) =>
-              d.deviceTag === payload.deviceTag &&
-              d.assignedTo === payload.assignedTo
-          );
-          if (newDevice) {
-            await logDeviceHistory({
-              employeeId: payload.assignedTo,
-              deviceId: newDevice.id,
-              deviceTag: newDevice.deviceTag,
-              action: "assigned",
-              date: new Date().toISOString(),
-            });
-          }
-        }
-      } else if (!form._editDeviceId) {
-        await addDevice(payloadWithoutId);
-        newDeviceTags = [payload.deviceTag];
+      if (!form._editDeviceId) {
+        await addDevice(payload);
       } else {
-        await updateDevice(form._editDeviceId, payloadWithoutId);
-        newDeviceTags = [payload.deviceTag];
+        await updateDevice(form._editDeviceId, payload);
       }
     } else {
-      if (!form._editDeviceId && quantity === 1) {
-        await addDevice(payloadWithoutId, tagPrefix);
-        newDeviceTags = [payload.deviceTag];
-        if (payload.assignedTo) {
-          const allDevicesNow = await getAllDevices();
-          const newDevice = allDevicesNow.find(
-            (d) =>
-              d.deviceTag === payload.deviceTag &&
-              d.assignedTo === payload.assignedTo
-          );
-          if (newDevice) {
-            await logDeviceHistory({
-              employeeId: payload.assignedTo,
-              deviceId: newDevice.id,
-              deviceTag: newDevice.deviceTag,
-              action: "assigned",
-              date: new Date().toISOString(),
-            });
-          }
-        }
-      } else if (!form._editDeviceId && quantity > 1) {
-        await addMultipleDevices(payloadWithoutId, quantity, tagPrefix);
-        const allDevicesAfter = await getAllDevices();
-        const maxTagNum = allDevicesAfter
-          .map((d) => d.deviceTag)
-          .filter((tag) => tag && tag.startsWith(tagPrefix))
-          .map((tag) => parseInt(tag.replace(tagPrefix, "")))
-          .filter((num) => !isNaN(num));
-        const newMax = Math.max(...maxTagNum);
-        newDeviceTags = Array.from(
-          { length: quantity },
-          (_, i) =>
-            `${tagPrefix}${String(newMax - quantity + 1 + i).padStart(4, "0")}`
-        );
+      if (!form._editDeviceId) {
+        await addDevice(payload, tagPrefix);
       } else {
-        await updateDevice(form._editDeviceId, payloadWithoutId);
-        newDeviceTags = [payload.deviceTag];
-      }
-    }
-    if (payload.assignedTo && newDeviceTags.length > 1) {
-      const allDevicesNow = await getAllDevices();
-      for (const tag of newDeviceTags) {
-        const newDevice = allDevicesNow.find(
-          (d) => d.deviceTag === tag && d.assignedTo === payload.assignedTo
-        );
-        if (newDevice) {
-          await logDeviceHistory({
-            employeeId: payload.assignedTo,
-            deviceId: newDevice.id,
-            deviceTag: newDevice.deviceTag,
-            action: "assigned",
-            date: new Date().toISOString(),
-          });
-        }
+        await updateDevice(form._editDeviceId, payload);
       }
     }
     resetForm();
@@ -835,6 +778,8 @@ function Inventory() {
       );
       setImportProgress({ current: 0, total: filteredRows.length });
       let importedCount = 0;
+      // Fetch all devices for duplicate check
+      const allDevices = await getAllDevices();
       for (let i = 0; i < filteredRows.length; i++) {
         const row = filteredRows[i];
         setImportProgress({ current: i + 1, total: filteredRows.length });
@@ -844,18 +789,54 @@ function Inventory() {
           row["Brand"] &&
           row["Condition"]
         ) {
+          // Convert Excel serial date to mm/dd/yyyy if needed
+          let acquisitionDate = row["Acquisition Date"] || "";
+          if (typeof acquisitionDate === "number") {
+            const jsDate = new Date(
+              Math.round((acquisitionDate - 25569) * 86400 * 1000)
+            );
+            acquisitionDate =
+              (jsDate.getMonth() + 1).toString().padStart(2, "0") +
+              "/" +
+              jsDate.getDate().toString().padStart(2, "0") +
+              "/" +
+              jsDate.getFullYear();
+          } else if (typeof acquisitionDate === "string" && acquisitionDate) {
+            // Try to parse and reformat if not already mm/dd/yyyy
+            const d = new Date(acquisitionDate);
+            if (!isNaN(d)) {
+              acquisitionDate =
+                (d.getMonth() + 1).toString().padStart(2, "0") +
+                "/" +
+                d.getDate().toString().padStart(2, "0") +
+                "/" +
+                d.getFullYear();
+            }
+          }
+          // Check for duplicate deviceTag
+          const existing = allDevices.find(
+            (d) =>
+              d.deviceTag &&
+              d.deviceTag.toLowerCase() === row["Device Tag"].toLowerCase()
+          );
+          const devicePayload = {
+            deviceType: row["Device Type"],
+            deviceTag: row["Device Tag"],
+            brand: row["Brand"],
+            model: row["Model"] || "",
+            condition: row["Condition"],
+            remarks: row["Remarks"] || "",
+            status: "Stock Room",
+            assignedTo: "",
+            assignmentDate: "",
+            acquisitionDate,
+          };
           try {
-            await addDevice({
-              deviceType: row["Device Type"],
-              deviceTag: row["Device Tag"],
-              brand: row["Brand"],
-              model: row["Model"] || "",
-              condition: row["Condition"],
-              remarks: row["Remarks"] || "",
-              status: "Stock Room",
-              assignedTo: "",
-              assignmentDate: "",
-            });
+            if (existing) {
+              await updateDevice(existing.id, devicePayload); // Overwrite
+            } else {
+              await addDevice(devicePayload);
+            }
             importedCount++;
           } catch (err) {}
         }
@@ -872,13 +853,12 @@ function Inventory() {
     e.target.value = "";
   };
 
+  // Update handleSelectAll to only select filtered devices
   const handleSelectAll = (e) => {
     const checked = e.target.checked;
     setSelectAll(checked);
     if (checked) {
-      setSelectedIds(
-        devices.filter((device) => !device.assignedTo).map((d) => d.id)
-      );
+      setSelectedIds(filteredDevices.map((d) => d.id));
     } else {
       setSelectedIds([]);
     }
@@ -1200,12 +1180,7 @@ function Inventory() {
         >
           Delete
         </button>
-        <button
-          style={styles.button}
-          onClick={() => {
-            // Function to be implemented
-          }}
-        >
+        <button style={styles.button} onClick={() => setShowNewAcqModal(true)}>
           New Acquisitions
         </button>
         {deleteProgress.total > 0 && (
@@ -1253,9 +1228,8 @@ function Inventory() {
                   <input
                     type="checkbox"
                     checked={
-                      devices.filter((d) => !d.assignedTo).length > 0 &&
-                      selectedIds.length ===
-                        devices.filter((d) => !d.assignedTo).length
+                      filteredDevices.length > 0 &&
+                      filteredDevices.every((d) => selectedIds.includes(d.id))
                     }
                     onChange={handleSelectAll}
                     style={{ width: 16, height: 16, margin: 0 }}
@@ -1265,12 +1239,18 @@ function Inventory() {
                 <th style={styles.th}>{fieldLabels.deviceTag}</th>
                 <th style={styles.th}>{fieldLabels.brand}</th>
                 <th style={styles.th}>{fieldLabels.model}</th>
-                <th style={styles.th}>{fieldLabels.assignedTo}</th>
-                <th style={styles.th}>{fieldLabels.assignmentDate}</th>
                 <th style={styles.th}>Status</th>
                 <th style={styles.th}>{fieldLabels.condition}</th>
                 <th style={styles.th}>{fieldLabels.remarks}</th>
-                <th style={styles.th}>Actions</th>
+                <th style={styles.th}>{fieldLabels.acquisitionDate}</th>
+                <th
+                  style={{
+                    ...styles.th,
+                    textAlign: "center",
+                  }}
+                >
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -1693,6 +1673,209 @@ function Inventory() {
           </div>
         </div>
       )}
+
+      {/* New Acquisitions Modal */}
+      {showNewAcqModal && (
+        <div style={styles.modalOverlay}>
+          <div style={styles.inventoryModalContent}>
+            <h3 style={styles.inventoryModalTitle}>
+              New Acquisitions (Bulk Add)
+            </h3>
+            <div
+              style={{
+                display: "flex",
+                gap: 16,
+                width: "100%",
+                marginBottom: 12,
+              }}
+            >
+              <div
+                style={{
+                  ...styles.inventoryInputGroup,
+                  flex: 1,
+                  marginBottom: 0,
+                }}
+              >
+                <label style={styles.inventoryLabel}>Device Type:</label>
+                <select
+                  name="deviceType"
+                  value={newAcqForm.deviceType}
+                  onChange={handleNewAcqInput}
+                  style={styles.inventoryInput}
+                >
+                  <option value="">Select Device Type</option>
+                  {deviceTypes.map((type) => (
+                    <option key={type.label} value={type.label}>
+                      {type.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div
+                style={{
+                  ...styles.inventoryInputGroup,
+                  flex: 1,
+                  marginBottom: 0,
+                }}
+              >
+                <label style={styles.inventoryLabel}>Brand:</label>
+                <input
+                  name="brand"
+                  value={newAcqForm.brand}
+                  onChange={handleNewAcqInput}
+                  style={styles.inventoryInput}
+                  autoComplete="off"
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                gap: 16,
+                width: "100%",
+                marginBottom: 12,
+              }}
+            >
+              <div
+                style={{
+                  ...styles.inventoryInputGroup,
+                  flex: 1,
+                  marginBottom: 0,
+                }}
+              >
+                <label style={styles.inventoryLabel}>Model:</label>
+                <input
+                  name="model"
+                  value={newAcqForm.model}
+                  onChange={handleNewAcqInput}
+                  style={styles.inventoryInput}
+                />
+              </div>
+
+              <div
+                style={{
+                  ...styles.inventoryInputGroup,
+                  flex: 1,
+                  marginBottom: 0,
+                }}
+              >
+                <label style={styles.inventoryLabel}>Condition:</label>
+                <select
+                  name="condition"
+                  value={newAcqForm.condition}
+                  onChange={handleNewAcqInput}
+                  style={styles.inventoryInput}
+                >
+                  <option value="">Select Condition</option>
+                  {conditions.map((cond) => (
+                    <option key={cond} value={cond}>
+                      {cond}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div style={{ ...styles.inventoryInputGroup, marginBottom: 12 }}>
+              <label style={styles.inventoryLabel}>Remarks:</label>
+              <input
+                name="remarks"
+                value={newAcqForm.remarks}
+                onChange={handleNewAcqInput}
+                style={styles.inventoryInput}
+              />
+            </div>
+            <div style={{ ...styles.inventoryInputGroup, marginBottom: 12 }}>
+              <label style={styles.inventoryLabel}>Acquisition Date:</label>
+              <input
+                name="acquisitionDate"
+                type="date"
+                value={newAcqForm.acquisitionDate || ""}
+                onChange={handleNewAcqInput}
+                style={styles.inventoryInput}
+              />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                gap: 16,
+                width: "100%",
+                marginBottom: 12,
+              }}
+            >
+              <div
+                style={{
+                  ...styles.inventoryInputGroup,
+                  flex: 1,
+                  marginBottom: 0,
+                }}
+              >
+                <label style={styles.inventoryLabel}>
+                  Start Tag (e.g. 0009):
+                </label>
+                <input
+                  name="startTag"
+                  value={newAcqForm.startTag}
+                  onChange={handleNewAcqInput}
+                  style={styles.inventoryInput}
+                  maxLength={4}
+                  placeholder="0001"
+                />
+              </div>
+              <div
+                style={{
+                  ...styles.inventoryInputGroup,
+                  flex: 1,
+                  marginBottom: 0,
+                }}
+              >
+                <label style={styles.inventoryLabel}>
+                  End Tag (e.g. 0015):
+                </label>
+                <input
+                  name="endTag"
+                  value={newAcqForm.endTag}
+                  onChange={handleNewAcqInput}
+                  style={styles.inventoryInput}
+                  maxLength={4}
+                  placeholder="0015"
+                />
+              </div>
+            </div>
+            {newAcqError && (
+              <span style={{ color: "#e57373", fontSize: 13, marginBottom: 8 }}>
+                {newAcqError}
+              </span>
+            )}
+            <div
+              style={{
+                marginTop: 16,
+                display: "flex",
+                justifyContent: "center",
+                gap: 10,
+                width: "100%",
+              }}
+            >
+              <button
+                onClick={handleNewAcqSubmit}
+                disabled={newAcqLoading}
+                style={{
+                  ...styles.inventoryModalButton,
+                  opacity: newAcqLoading ? 0.6 : 1,
+                }}
+              >
+                {newAcqLoading ? "Adding..." : "Add Devices"}
+              </button>
+              <button
+                onClick={() => setShowNewAcqModal(false)}
+                style={styles.inventoryModalButtonSecondary}
+                disabled={newAcqLoading}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -1922,17 +2105,15 @@ const styles = {
   },
   inventoryInput: {
     width: "100%",
-    padding: "8px 12px",
-    borderRadius: 6,
-    border: "1.5px solid #cbd5e1",
-    fontSize: 14,
+    minWidth: 0,
+    fontSize: 13,
+    padding: "6px 8px",
+    borderRadius: 5,
+    border: "1.2px solid #cbd5e1",
     background: "#f1f5f9",
-    color: "#222e3a",
-    outline: "none",
-    marginBottom: 0,
-    transition: "border 0.2s, box-shadow 0.2s",
-    height: "36px",
+    height: "32px",
     boxSizing: "border-box",
+    marginBottom: 0,
   },
   inventoryModalButton: {
     background: "#2563eb",
