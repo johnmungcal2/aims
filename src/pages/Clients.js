@@ -190,12 +190,10 @@ function Clients() {
             <thead>
               <tr>
                 {/* To adjust table width, edit the width/minWidth/maxWidth values below */}
-<<<<<<< HEAD
                 <th style={{ ...styles.th, width: 70, minWidth: 50, maxWidth: 80 }}>ID</th>
                 <th style={{ ...styles.th, width: 140, minWidth: 100, maxWidth: 180 }}>Client Name</th>
                 <th style={{ ...styles.th, width: 60, minWidth: 40, maxWidth: 80, textAlign: "center" }}>Employee Count</th>
                 <th style={{ ...styles.th, width: 70, minWidth: 50, maxWidth: 90, textAlign: "center" }}>Actions</th>
-=======
                 <th
                   style={{
                     ...styles.th,
@@ -238,18 +236,15 @@ function Clients() {
                 >
                   Actions
                 </th>
->>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
               </tr>
             </thead>
             <tbody>
               {filteredClients.map((client) => (
                 <tr key={client.id}>
-<<<<<<< HEAD
                   <td style={{ ...styles.td, width: 70, minWidth: 50, maxWidth: 80 }}>{client.id}</td>
                   <td style={{ ...styles.td, width: 140, minWidth: 100, maxWidth: 180 }}>{client.clientName}</td>
                   <td style={{ ...styles.td, width: 60, minWidth: 40, maxWidth: 80, textAlign: "center" }}>{client.employeeCount ?? 0}</td>
                   <td style={{ ...styles.td, width: 70, minWidth: 50, maxWidth: 90, textAlign: "center", padding: 0 }}>
-=======
                   <td
                     style={{
                       ...styles.td,
@@ -291,7 +286,6 @@ function Clients() {
                       padding: 0,
                     }}
                   >
->>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                     <div
                       style={{
                         display: "flex",
@@ -315,7 +309,6 @@ function Clients() {
                           cursor: "pointer",
                           transition: "background 0.18s",
                         }}
-<<<<<<< HEAD
                         onMouseEnter={e => e.currentTarget.style.background = "#d0f0f7"}
                         onMouseLeave={e => e.currentTarget.style.background = "#eaf7fa"}
                         onClick={() => handleEdit(client)}
@@ -324,7 +317,6 @@ function Clients() {
                         <svg width="16" height="16" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                           <path d="M12 20h9"/>
                           <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
-=======
                         onMouseEnter={(e) =>
                           (e.currentTarget.style.background = "#d0f0f7")
                         }
@@ -346,7 +338,6 @@ function Clients() {
                         >
                           <path d="M12 20h9" />
                           <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
->>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                         </svg>
                       </button>
                       <button

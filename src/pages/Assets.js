@@ -408,8 +408,6 @@ function DeviceFormModal({
       </div>
     </div>
   );
-<<<<<<< HEAD
-=======
 }
 
 function Assets() {
@@ -2237,7 +2235,6 @@ function Assets() {
       )}
     </div>
   );
->>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
 }
 
 function Assets() {

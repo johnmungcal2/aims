@@ -2208,13 +2208,10 @@ const addDevicesInBulk = async ({ deviceType, brand, model, condition, remarks, 
           <div style={styles.modalContent}>
             {assignModalStep === 1 && (
               <>
-<<<<<<< HEAD
                 <h4 style={styles.modalTitle}>Assign Device: {assigningDevice.deviceTag}</h4>
-=======
                 <h4 style={styles.modalTitle}>
                   Assign Device: {assigningDevice.deviceTag}
                 </h4>
->>>>>>> f0728713345a7f3cc6ca76c8842bc190f923e087
                 <input
                   type="text"
                   placeholder="Search employee..."
